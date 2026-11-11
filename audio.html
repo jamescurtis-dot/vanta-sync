@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio | Vanta Sync</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --blue: #00c8ff;
+    --purple: #9b5cff;
+    --bg: #070710;
+    --panel: #111120;
+    --muted: #a3a3bb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 10% 15%, #007bff20, transparent 30%),
+        radial-gradient(circle at 90% 45%, #9b5cff20, transparent 35%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* NAVIGATION */
+
+nav {
+    position: sticky;
+    top: 12px;
+    z-index: 100;
+    width: 94%;
+    max-width: 1250px;
+    margin: 15px auto;
+    padding: 15px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    background: #10101de8;
+    border: 1px solid #34345b;
+    border-radius: 18px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 25px #007bff15;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.logo span { color: var(--blue); }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #c3c3d6;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--blue);
+    text-shadow: 0 0 12px var(--blue);
+}
+
+/* HERO */
+
+.hero {
+    width: 94%;
+    max-width: 1250px;
+    min-height: 390px;
+    margin: 35px auto 75px;
+    padding: 65px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 28px;
+    border: 1px solid #333b72;
+    background:
+        linear-gradient(100deg, #080817 20%, #10102bde 55%, #17102de0),
+        url("images/audio-banner.jpg") center/cover;
+    box-shadow: 0 0 45px #006eff20;
+}
+
+.hero::after {
+    content: "♫";
+    position: absolute;
+    right: 8%;
+    top: 0;
+    font-size: 280px;
+    color: #8b5cff18;
+    font-family: serif;
+    transform: rotate(-12deg);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    color: var(--blue);
+    letter-spacing: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 510px;
+    font-size: 14px;
+}
+
+.primary-btn {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 25px;
+    border-radius: 10px;
+    background: linear-gradient(100deg, #007dff, #8646ff);
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 0 25px #536bff55;
+    transition: .3s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px #536bff99;
+}
+
+/* SECTION HEADERS */
+
+section {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto 85px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.section-heading h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(21px, 3vw, 30px);
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 9px;
+}
+
+/* FEATURED */
+
+.featured {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+}
+
+.feature-card {
+    position: relative;
+    min-height: 260px;
+    padding: 25px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border: 1px solid #35355d;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #111c3b, #17102a);
+    transition: .3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue);
+    box-shadow: 0 0 25px #007dff30;
+}
+
+.feature-card:nth-child(2) {
+    background: linear-gradient(135deg, #241344, #10152c);
+}
+
+.feature-card::before {
+    content: "♫";
+    position: absolute;
+    right: 20px;
+    top: -35px;
+    font-size: 190px;
+    color: #ffffff0c;
+}
+
+.feature-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    position: relative;
+}
+
+.feature-card p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 10px;
+    position: relative;
+}
+
+/* PRODUCT GRID */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.product {
+    background: var(--panel);
+    border: 1px solid #292944;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-6px);
+    border-color: var(--purple);
+    box-shadow: 0 0 24px #9b5cff20;
+}
+
+.product-image {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #10254b, #261344);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info { padding: 19px; }
+
+.product-info h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.product-info p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.product-btn {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: #171b35;
+    border: 1px solid #4545a0;
+    border-radius: 8px;
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* WAVEFORM */
+
+.wave-section {
+    padding: 35px;
+    border-radius: 22px;
+    border: 1px solid #33345f;
+    background: linear-gradient(110deg, #101a32, #1b1030);
+    text-align: center;
+}
+
+.wave-section h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+}
+
+.wave-section p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.waveform {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px 0;
+}
+
+.waveform span {
+    width: 5px;
+    height: var(--h);
+    border-radius: 10px;
+    background: linear-gradient(var(--blue), var(--purple));
+    box-shadow: 0 0 10px #008cff70;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid #24243d;
+    padding: 35px 5%;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer strong {
+    color: var(--blue);
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* MOBILE */
+
+@media(max-width: 850px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .nav-links {
+        justify-content: flex-start;
+        gap: 13px;
+    }
+
+    .hero { padding: 40px 25px; }
+    .featured { grid-template-columns: 1fr; }
+    .products { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width: 550px) {
+    .products { grid-template-columns: 1fr; }
+    .hero { min-height: 340px; }
+    .section-heading { align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">VANTA<span>SYNC</span></div>
+
+    <div class="nav-links">
+        <a href="vanta-sync.html">Home</a>
+        <a href="audio.html" class="active">Audio</a>
+        <a href="twixtors.html">Twixtors</a>
+        <a href="clips.html">Clips</a>
+        <a href="overlays.html">Overlays</a>
+        <a href="effects.html">Effects</a>
+        <a href="transitions.html">Transitions</a>
+        <a href="anime-packs.html">Anime</a>
+        <a href="free-downloads.html">Free</a>
+        <a href="premium-packs.html">Premium</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">VANTA SYNC / AUDIO DIVISION</div>
+        <h1>FEEL THE <span>SOUND.</span></h1>
+        <p>
+            Discover audio resources built for editors.
+            From sound effects to cinematic audio packs,
+            find the sounds that give your edits a whole new identity.
+        </p>
+        <a href="#collection" class="primary-btn">EXPLORE AUDIO ↗</a>
+    </div>
+</header>
+
+<section>
+    <div class="section-heading">
+        <div>
+            <h2>THE AUDIO UNIVERSE</h2>
+            <p>Explore the sound categories inside Vanta Sync.</p>
+        </div>
+    </div>
+
+    <div class="featured">
+        <div class="feature-card">
+            <h3>Sound Effects</h3>
+            <p>Impact sounds, transitions, atmosphere and more.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Music Packs</h3>
+            <p>Discover sounds for your next editing project.</p>
+        </div>
+    </div>
+</section>
+
+<section id="collection">
+    <div class="section-heading">
+        <div>
+            <h2>THE COLLECTION</h2>
+            <p>Browse the latest audio resources.</p>
+        </div>
+    </div>
+
+    <div class="products">
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/audio-1.jpg" alt="Sound effects pack"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Impact SFX Pack</h3>
+                <p>Powerful sound effects for your edits.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/audio-2.jpg" alt="Cinematic audio pack"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Cinematic Audio</h3>
+                <p>Atmospheric sounds for cinematic edits.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/audio-3.jpg" alt="Transition sounds"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Transition SFX</h3>
+                <p>Sounds to give your transitions more impact.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/audio-4.jpg" alt="Bass audio pack"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Bass Collection</h3>
+                <p>Deep bass and powerful audio elements.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/audio-5.jpg" alt="Ambient audio pack"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Ambient Sounds</h3>
+                <p>Background atmospheres and textures.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/audio-6.jpg" alt="Audio essentials pack"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Audio Essentials</h3>
+                <p>A collection of useful editing sounds.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<section>
+    <div class="wave-section">
+        <h2>YOUR EDIT. YOUR SOUND.</h2>
+        <p>Make every moment hit differently with Vanta Sync.</p>
+
+        <div class="waveform">
+            <span style="--h:20px"></span>
+            <span style="--h:35px"></span>
+            <span style="--h:55px"></span>
+            <span style="--h:30px"></span>
+            <span style="--h:70px"></span>
+            <span style="--h:45px"></span>
+            <span style="--h:80px"></span>
+            <span style="--h:40px"></span>
+            <span style="--h:65px"></span>
+            <span style="--h:30px"></span>
+            <span style="--h:75px"></span>
+            <span style="--h:45px"></span>
+            <span style="--h:60px"></span>
+            <span style="--h:25px"></span>
+            <span style="--h:50px"></span>
+            <span style="--h:35px"></span>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <strong>VANTA SYNC</strong>
+    <p style="margin-top:10px">Create beyond limits.</p>
+    <p style="margin-top:12px">© 2026 Vanta Sync. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

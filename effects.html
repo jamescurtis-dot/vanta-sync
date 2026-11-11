@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Effects | Vanta Sync</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+--blue:#00c8ff;
+--purple:#9b5cff;
+--bg:#070710;
+--panel:#111120;
+--muted:#a3a3bb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+background:var(--bg);
+color:white;
+font-family:Inter,sans-serif;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+z-index:-1;
+background:
+radial-gradient(circle at 10% 20%,#007bff20,transparent 30%),
+radial-gradient(circle at 90% 50%,#9b5cff20,transparent 35%);
+}
+
+/* NAVIGATION */
+
+nav{
+position:sticky;
+top:12px;
+z-index:100;
+width:94%;
+max-width:1250px;
+margin:15px auto;
+padding:15px 22px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+background:#10101de8;
+border:1px solid #34345b;
+border-radius:18px;
+backdrop-filter:blur(18px);
+box-shadow:0 0 25px #007bff15;
+}
+
+.logo{
+font-family:Orbitron,sans-serif;
+font-size:19px;
+font-weight:800;
+white-space:nowrap;
+}
+
+.logo span{color:var(--blue)}
+
+.nav-links{
+display:flex;
+align-items:center;
+gap:17px;
+flex-wrap:wrap;
+justify-content:flex-end;
+}
+
+.nav-links a{
+color:#c3c3d6;
+text-decoration:none;
+font-size:12px;
+transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+color:var(--blue);
+text-shadow:0 0 12px var(--blue);
+}
+
+/* HERO */
+
+.hero{
+width:94%;
+max-width:1250px;
+min-height:430px;
+margin:35px auto 75px;
+padding:55px;
+display:flex;
+align-items:center;
+position:relative;
+overflow:hidden;
+border:1px solid #343b72;
+border-radius:28px;
+background:
+linear-gradient(100deg,#080817 15%,#10102bdc 55%,#17102de0),
+url("images/effects-banner.jpg") center/cover;
+box-shadow:0 0 45px #006eff20;
+}
+
+.hero::after{
+content:"FX";
+position:absolute;
+right:7%;
+top:50%;
+transform:translateY(-50%);
+font-family:Orbitron,sans-serif;
+font-size:clamp(120px,20vw,250px);
+font-weight:800;
+color:#9b5cff13;
+pointer-events:none;
+}
+
+.hero-content{
+max-width:650px;
+position:relative;
+z-index:2;
+}
+
+.eyebrow{
+color:var(--blue);
+letter-spacing:4px;
+font-size:11px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+h1{
+font-family:Orbitron,sans-serif;
+font-size:clamp(38px,6vw,72px);
+line-height:1.1;
+margin-bottom:20px;
+}
+
+h1 span{
+background:linear-gradient(90deg,var(--blue),var(--purple));
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero p{
+color:var(--muted);
+line-height:1.8;
+max-width:510px;
+font-size:14px;
+}
+
+.primary-btn{
+display:inline-block;
+margin-top:28px;
+padding:14px 25px;
+border-radius:10px;
+background:linear-gradient(100deg,#007dff,#8646ff);
+color:white;
+text-decoration:none;
+font-size:13px;
+font-weight:800;
+box-shadow:0 0 25px #536bff55;
+transition:.3s;
+}
+
+.primary-btn:hover{
+transform:translateY(-4px);
+box-shadow:0 0 35px #536bff99;
+}
+
+/* SECTIONS */
+
+section{
+width:92%;
+max-width:1200px;
+margin:0 auto 85px;
+}
+
+.heading{margin-bottom:28px}
+
+.heading h2{
+font-family:Orbitron,sans-serif;
+font-size:clamp(21px,3vw,30px);
+}
+
+.heading p{
+color:var(--muted);
+font-size:12px;
+margin-top:9px;
+}
+
+/* FX SHOWCASE */
+
+.showcase{
+display:grid;
+grid-template-columns:1.3fr .7fr;
+gap:20px;
+}
+
+.fx-main{
+min-height:340px;
+position:relative;
+overflow:hidden;
+border-radius:22px;
+border:1px solid #343b72;
+background:linear-gradient(135deg,#10254b,#261344);
+}
+
+.fx-main img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.fx-main::after{
+content:"";
+position:absolute;
+inset:35% 0 0;
+background:linear-gradient(transparent,#080817e8);
+}
+
+.fx-label{
+position:absolute;
+bottom:25px;
+left:25px;
+z-index:2;
+}
+
+.fx-label small{
+color:var(--blue);
+letter-spacing:3px;
+font-weight:800;
+}
+
+.fx-label h3{
+font-family:Orbitron,sans-serif;
+font-size:23px;
+margin-top:10px;
+}
+
+.fx-side{
+display:grid;
+grid-template-rows:1fr 1fr;
+gap:16px;
+}
+
+.fx-card{
+padding:25px;
+border:1px solid #35355d;
+border-radius:18px;
+background:linear-gradient(120deg,#101b37,#211138);
+display:flex;
+flex-direction:column;
+justify-content:center;
+transition:.3s;
+}
+
+.fx-card:hover{
+border-color:var(--purple);
+box-shadow:0 0 22px #9b5cff25;
+}
+
+.fx-card h3{
+font-family:Orbitron,sans-serif;
+font-size:17px;
+}
+
+.fx-card p{
+color:var(--muted);
+font-size:12px;
+line-height:1.7;
+margin-top:10px;
+}
+
+/* CATEGORY GRID */
+
+.categories{
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+gap:16px;
+}
+
+.category{
+padding:23px;
+min-height:145px;
+border:1px solid #303052;
+border-radius:17px;
+background:var(--panel);
+transition:.3s;
+}
+
+.category:hover{
+transform:translateY(-5px);
+border-color:var(--blue);
+box-shadow:0 0 22px #007dff25;
+}
+
+.category-icon{
+font-size:27px;
+color:var(--blue);
+margin-bottom:17px;
+}
+
+.category h3{font-size:14px}
+
+.category p{
+font-size:11px;
+color:var(--muted);
+margin-top:8px;
+line-height:1.6;
+}
+
+/* PRODUCT COLLECTION */
+
+.products{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:20px;
+}
+
+.product{
+background:var(--panel);
+border:1px solid #292944;
+border-radius:18px;
+overflow:hidden;
+transition:.3s;
+}
+
+.product:hover{
+transform:translateY(-6px);
+border-color:var(--purple);
+box-shadow:0 0 24px #9b5cff20;
+}
+
+.product-image{
+height:190px;
+background:linear-gradient(135deg,#10254b,#261344);
+}
+
+.product-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.product-info{padding:19px}
+
+.product-info h3{
+font-size:16px;
+margin-bottom:8px;
+}
+
+.product-info p{
+color:var(--muted);
+font-size:12px;
+line-height:1.6;
+}
+
+.product-btn{
+display:inline-block;
+margin-top:16px;
+padding:10px 16px;
+background:#171b35;
+border:1px solid #4545a0;
+border-radius:8px;
+color:var(--blue);
+text-decoration:none;
+font-size:11px;
+font-weight:700;
+}
+
+/* BOTTOM BANNER */
+
+.bottom-banner{
+padding:45px 25px;
+text-align:center;
+border-radius:22px;
+border:1px solid #34345e;
+background:linear-gradient(110deg,#101a32,#1b1030);
+}
+
+.bottom-banner h2{
+font-family:Orbitron,sans-serif;
+font-size:clamp(22px,4vw,35px);
+}
+
+.bottom-banner p{
+color:var(--muted);
+font-size:13px;
+margin-top:12px;
+}
+
+/* FOOTER */
+
+footer{
+border-top:1px solid #24243d;
+padding:35px 5%;
+text-align:center;
+color:var(--muted);
+font-size:12px;
+}
+
+footer strong{
+color:var(--blue);
+font-family:Orbitron,sans-serif;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+nav{flex-direction:column;align-items:flex-start}
+.nav-links{justify-content:flex-start;gap:13px}
+.hero{padding:40px 25px}
+.showcase{grid-template-columns:1fr}
+.categories{grid-template-columns:repeat(2,1fr)}
+.products{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:550px){
+.products{grid-template-columns:1fr}
+.hero{min-height:350px}
+.categories{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">VANTA<span>SYNC</span></div>
+
+<div class="nav-links">
+<a href="vanta-sync.html">Home</a>
+<a href="audio.html">Audio</a>
+<a href="twixtors.html">Twixtors</a>
+<a href="clips.html">Clips</a>
+<a href="overlays.html">Overlays</a>
+<a href="effects.html" class="active">Effects</a>
+<a href="transitions.html">Transitions</a>
+<a href="anime-packs.html">Anime</a>
+<a href="free-downloads.html">Free</a>
+<a href="premium-packs.html">Premium</a>
+</div>
+</nav>
+
+<header class="hero">
+<div class="hero-content">
+<div class="eyebrow">VANTA SYNC / FX LABORATORY</div>
+
+<h1>CREATE THE <span>IMPACT.</span></h1>
+
+<p>
+Discover visual effects, cinematic elements,
+glowing details and creative resources designed
+to take your editing projects further.
+</p>
+
+<a href="#collection" class="primary-btn">ENTER THE FX LAB ↗</a>
+</div>
+</header>
+
+<section>
+<div class="heading">
+<h2>THE FX LABORATORY</h2>
+<p>Explore visual effects and creative possibilities.</p>
+</div>
+
+<div class="showcase">
+
+<div class="fx-main">
+<img src="images/fx-showcase.jpg"
+alt="Visual effects showcase"
+onerror="this.style.display='none'">
+
+<div class="fx-label">
+<small>FEATURED VISUALS</small>
+<h3>BEYOND THE ORDINARY</h3>
+</div>
+</div>
+
+<div class="fx-side">
+
+<div class="fx-card">
+<h3>ENERGY EFFECTS</h3>
+<p>Glowing elements, energy visuals and creative lighting.</p>
+</div>
+
+<div class="fx-card">
+<h3>CINEMATIC FX</h3>
+<p>Visual details for dramatic editing projects.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section>
+<div class="heading">
+<h2>EXPLORE EFFECTS</h2>
+<p>Different styles. Different possibilities.</p>
+</div>
+
+<div class="categories">
+
+<div class="category">
+<div class="category-icon">✦</div>
+<h3>Glow Effects</h3>
+<p>Neon lights and glowing elements.</p>
+</div>
+
+<div class="category">
+<div class="category-icon">◈</div>
+<h3>Energy FX</h3>
+<p>Creative energy and power visuals.</p>
+</div>
+
+<div class="category">
+<div class="category-icon">✧</div>
+<h3>Particles</h3>
+<p>Dust, sparks and floating elements.</p>
+</div>
+
+<div class="category">
+<div class="category-icon">◇</div>
+<h3>Distortion</h3>
+<p>Glitch and distortion effects.</p>
+</div>
+
+<div class="category">
+<div class="category-icon">⚡</div>
+<h3>Lightning</h3>
+<p>Electric visual elements.</p>
+</div>
+
+<div class="category">
+<div class="category-icon">◎</div>
+<h3>Motion FX</h3>
+<p>Creative movement effects.</p>
+</div>
+
+<div class="category">
+<div class="category-icon">✺</div>
+<h3>Fire FX</h3>
+<p>Flame-inspired visual resources.</p>
+</div>
+
+<div class="category">
+<div class="category-icon">✷</div>
+<h3>Special FX</h3>
+<p>Unique effects for creative edits.</p>
+</div>
+
+</div>
+</section>
+
+<section id="collection">
+<div class="heading">
+<h2>THE EFFECTS COLLECTION</h2>
+<p>Explore the available FX packs.</p>
+</div>
+
+<div class="products">
+
+<article class="product">
+<div class="product-image">
+<img src="images/effect-1.jpg" alt="Glow effects pack" onerror="this.style.display='none'">
+</div>
+<div class="product-info">
+<h3>Ultimate Glow Pack</h3>
+<p>Glowing visuals and neon-inspired elements.</p>
+<a href="#" class="product-btn">VIEW PACK ↗</a>
+</div>
+</article>
+
+<article class="product">
+<div class="product-image">
+<img src="images/effect-2.jpg" alt="Energy effects pack" onerror="this.style.display='none'">
+</div>
+<div class="product-info">
+<h3>Energy FX Pack</h3>
+<p>Energy visuals for creative editing projects.</p>
+<a href="#" class="product-btn">VIEW PACK ↗</a>
+</div>
+</article>
+
+<article class="product">
+<div class="product-image">
+<img src="images/effect-3.jpg" alt="Particle effects pack" onerror="this.style.display='none'">
+</div>
+<div class="product-info">
+<h3>Particle Collection</h3>
+<p>Particles and atmospheric visual elements.</p>
+<a href="#" class="product-btn">VIEW PACK ↗</a>
+</div>
+</article>
+
+<article class="product">
+<div class="product-image">
+<img src="images/effect-4.jpg" alt="Glitch effects pack" onerror="this.style.display='none'">
+</div>
+<div class="product-info">
+<h3>Glitch Essentials</h3>
+<p>Digital distortion and glitch-style effects.</p>
+<a href="#" class="product-btn">VIEW PACK ↗</a>
+</div>
+</article>
+
+<article class="product">
+<div class="product-image">
+<img src="images/effect-5.jpg" alt="Cinematic effects pack" onerror="this.style.display='none'">
+</div>
+<div class="product-info">
+<h3>Cinematic FX</h3>
+<p>Visual resources for cinematic projects.</p>
+<a href="#" class="product-btn">VIEW PACK ↗</a>
+</div>
+</article>
+
+<article class="product">
+<div class="product-image">
+<img src="images/effect-6.jpg" alt="Special effects pack" onerror="this.style.display='none'">
+</div>
+<div class="product-info">
+<h3>Special Effects Bundle</h3>
+<p>A collection of creative visual effects.</p>
+<a href="#" class="product-btn">VIEW PACK ↗</a>
+</div>
+</article>
+
+</div>
+</section>
+
+<section>
+<div class="bottom-banner">
+<h2>MAKE YOUR EDIT UNFORGETTABLE.</h2>
+<p>Experiment. Create. Elevate your visual style.</p>
+</div>
+</section>
+
+<footer>
+<strong>VANTA SYNC</strong>
+<p style="margin-top:10px">Create beyond limits.</p>
+<p style="margin-top:12px">© 2026 Vanta Sync. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

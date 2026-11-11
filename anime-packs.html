@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Packs | Vanta Sync</title>
+
+<style>
+:root {
+    --blue: #00c8ff;
+    --purple: #9b5cff;
+    --bg: #050610;
+    --panel: #0d1121;
+    --muted: #9ba8c4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a { text-decoration: none; color: inherit; }
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 6%;
+    background: rgba(5,6,16,.95);
+    border-bottom: 1px solid rgba(0,200,255,.2);
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.logo span { color: var(--blue); }
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 17px;
+}
+
+.nav-links a {
+    color: #aab4ca;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--blue);
+    text-shadow: 0 0 12px var(--blue);
+}
+
+.hero {
+    min-height: 590px;
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, #050610 5%, rgba(5,6,16,.86) 52%, rgba(5,6,16,.25)),
+        url("images/anime-packs-banner.jpg") center/cover,
+        radial-gradient(circle at 80% 40%, #34205e, #050610 65%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+}
+
+.eyebrow {
+    color: var(--blue);
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 8vw, 92px);
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #b1bad0;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 25px 0 32px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 25px;
+    border-radius: 5px;
+    background: linear-gradient(100deg, #00bfff, #8155ff);
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 0 25px rgba(0,160,255,.25);
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px rgba(0,160,255,.5);
+}
+
+section { padding: 85px 7%; }
+
+.heading { margin-bottom: 35px; }
+
+.heading small {
+    color: var(--blue);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.heading h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-top: 12px;
+}
+
+.heading p {
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.featured {
+    background: #080b19;
+}
+
+.feature-layout {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 25px;
+    align-items: stretch;
+}
+
+.feature-art {
+    min-height: 380px;
+    border-radius: 13px;
+    overflow: hidden;
+    position: relative;
+    background:
+        linear-gradient(135deg, #102c4c, #29174d, #080b19);
+    border: 1px solid rgba(0,200,255,.25);
+}
+
+.feature-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+}
+
+.feature-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 35%, rgba(0,0,0,.85));
+}
+
+.feature-caption {
+    position: absolute;
+    z-index: 2;
+    bottom: 25px;
+    left: 25px;
+}
+
+.feature-caption small {
+    color: var(--blue);
+    letter-spacing: 2px;
+}
+
+.feature-caption h3 {
+    font-size: 30px;
+    margin-top: 9px;
+}
+
+.feature-details {
+    padding: 35px;
+    background: var(--panel);
+    border: 1px solid rgba(155,92,255,.25);
+    border-radius: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-details h3 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.feature-details p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.feature-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.feature-list li {
+    padding: 11px 0;
+    color: #c2cce0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.feature-list li::before {
+    content: "✦";
+    color: var(--blue);
+    margin-right: 10px;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.category {
+    padding: 25px;
+    min-height: 150px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #111a30, #0b0d1b);
+    border: 1px solid rgba(0,200,255,.17);
+    transition: .3s;
+}
+
+.category:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue);
+    box-shadow: 0 0 25px rgba(0,200,255,.12);
+}
+
+.category .icon {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.category h3 { font-size: 16px; }
+
+.category p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 9px;
+    line-height: 1.5;
+}
+
+.packs {
+    background:
+        radial-gradient(circle at 95% 30%, rgba(155,92,255,.09), transparent 35%),
+        #070914;
+}
+
+.pack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.pack {
+    background: #0d1121;
+    border: 1px solid rgba(155,92,255,.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.pack:hover {
+    transform: translateY(-7px);
+    border-color: var(--blue);
+    box-shadow: 0 12px 35px rgba(0,150,255,.12);
+}
+
+.pack-image {
+    height: 220px;
+    background: linear-gradient(135deg, #102d4d, #342052, #080b19);
+    position: relative;
+    overflow: hidden;
+}
+
+.pack-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pack-info { padding: 22px; }
+
+.pack-info small {
+    color: var(--blue);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.pack-info h3 {
+    margin: 11px 0;
+    font-size: 19px;
+}
+
+.pack-info p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 42px;
+}
+
+.pack-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pack-bottom span {
+    font-size: 12px;
+    color: #c3cce0;
+}
+
+.pack-bottom a {
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pack-bottom a:hover { color: var(--purple); }
+
+.notice {
+    margin: 0 7% 85px;
+    padding: 28px;
+    border-left: 3px solid var(--blue);
+    background: #0c1020;
+    border-radius: 5px;
+}
+
+.notice h3 { margin-bottom: 10px; }
+
+.notice p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.cta {
+    margin: 0 7% 85px;
+    padding: 65px 30px;
+    text-align: center;
+    border: 1px solid rgba(0,200,255,.3);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(0,200,255,.14), transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(155,92,255,.16), transparent 40%),
+        #0c1020;
+}
+
+.cta h2 {
+    font-size: clamp(27px, 4vw, 42px);
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: var(--muted);
+    max-width: 550px;
+    margin: 0 auto 25px;
+    line-height: 1.7;
+}
+
+footer {
+    padding: 35px 7%;
+    border-top: 1px solid rgba(0,200,255,.15);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: #7e8aa5;
+    font-size: 12px;
+}
+
+footer strong { color: white; }
+
+@media(max-width: 900px) {
+    .categories { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { gap: 11px; }
+    .nav-links a { font-size: 11px; }
+}
+
+@media(max-width: 650px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero {
+        min-height: 490px;
+        padding: 75px 7%;
+    }
+
+    .hero h1 { letter-spacing: -2px; }
+
+    section { padding: 65px 6%; }
+
+    .feature-layout,
+    .pack-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-art { min-height: 280px; }
+
+    .categories { grid-template-columns: repeat(2, 1fr); }
+
+    .notice,
+    .cta { margin-left: 6%; margin-right: 6%; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="vanta-sync.html" class="logo">VANTA<span>SYNC</span></a>
+
+    <div class="nav-links">
+        <a href="vanta-sync.html">Home</a>
+        <a href="audio.html">Audio</a>
+        <a href="twixtors.html">Twixtors</a>
+        <a href="clips.html">Clips</a>
+        <a href="overlays.html">Overlays</a>
+        <a href="effects.html">Effects</a>
+        <a href="transitions.html">Transitions</a>
+        <a href="anime-packs.html" class="active">Anime Packs</a>
+        <a href="free-downloads.html">Free Downloads</a>
+        <a href="premium-packs.html">Premium Packs</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">VANTA SYNC / ANIME COLLECTION</div>
+        <h1>ENTER THE<br><span>ANIME ERA.</span></h1>
+        <p>
+            Bring your anime edits to life with creative resources,
+            visual assets and editing collections made for
+            expressive storytelling.
+        </p>
+        <a href="#packs" class="btn">EXPLORE ANIME PACKS ↗</a>
+    </div>
+</header>
+
+<section class="featured">
+    <div class="heading">
+        <small>FEATURED COLLECTION</small>
+        <h2>Built for anime editors.</h2>
+        <p>
+            Explore resources for character edits, cinematic
+            sequences and creative anime projects.
+        </p>
+    </div>
+
+    <div class="feature-layout">
+        <div class="feature-art">
+            <img src="images/anime-showcase.jpg" alt=""
+                 onerror="this.style.display='none'">
+            <div class="feature-caption">
+                <small>VANTA EXCLUSIVE</small>
+                <h3>The Anime Edit Collection</h3>
+            </div>
+        </div>
+
+        <div class="feature-details">
+            <h3>Build your next masterpiece.</h3>
+            <p>
+                Find visual resources to help shape your editing
+                style, from dramatic character moments to
+                energetic action sequences.
+            </p>
+
+            <ul class="feature-list">
+                <li>Character-focused resources</li>
+                <li>Cinematic visual assets</li>
+                <li>Creative editing collections</li>
+                <li>Resources for different editing styles</li>
+            </ul>
+
+            <a href="#packs" class="btn">VIEW COLLECTION ↗</a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="heading">
+        <small>EXPLORE BY STYLE</small>
+        <h2>Choose your universe.</h2>
+        <p>Different collections for different creative directions.</p>
+    </div>
+
+    <div class="categories">
+        <div class="category">
+            <div class="icon">⚔</div>
+            <h3>Action Edits</h3>
+            <p>High-energy visual resources.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🌌</div>
+            <h3>Cinematic</h3>
+            <p>Atmospheric editing assets.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">✦</div>
+            <h3>Character Edits</h3>
+            <p>Resources for character-focused edits.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">◈</div>
+            <h3>Aesthetic</h3>
+            <p>Stylized and creative visuals.</p>
+        </div>
+    </div>
+</section>
+
+<section class="packs" id="packs">
+    <div class="heading">
+        <small>THE ANIME VAULT</small>
+        <h2>Explore the packs.</h2>
+        <p>
+            Browse the planned collection of anime editing
+            resources from Vanta Sync.
+        </p>
+    </div>
+
+    <div class="pack-grid">
+
+        <article class="pack">
+            <div class="pack-image">
+                <img src="images/anime-pack-1.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="pack-info">
+                <small>PACK 01 / CHARACTER</small>
+                <h3>Character Edit Pack</h3>
+                <p>Visual resources for character-focused edits.</p>
+                <div class="pack-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="pack">
+            <div class="pack-image">
+                <img src="images/anime-pack-2.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="pack-info">
+                <small>PACK 02 / CINEMATIC</small>
+                <h3>Anime Cinematic Pack</h3>
+                <p>Resources for cinematic anime sequences.</p>
+                <div class="pack-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="pack">
+            <div class="pack-image">
+                <img src="images/anime-pack-3.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="pack-info">
+                <small>PACK 03 / ACTION</small>
+                <h3>Action Edit Pack</h3>
+                <p>Visual assets for energetic action edits.</p>
+                <div class="pack-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="pack">
+            <div class="pack-image">
+                <img src="images/anime-pack-4.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="pack-info">
+                <small>PACK 04 / AESTHETIC</small>
+                <h3>Aesthetic Anime Pack</h3>
+                <p>Stylized assets for unique visual edits.</p>
+                <div class="pack-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="pack">
+            <div class="pack-image">
+                <img src="images/anime-pack-5.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="pack-info">
+                <small>PACK 05 / VISUALS</small>
+                <h3>Anime Visual Bundle</h3>
+                <p>A mixed collection of anime editing visuals.</p>
+                <div class="pack-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="pack">
+            <div class="pack-image">
+                <img src="images/anime-pack-6.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="pack-info">
+                <small>PACK 06 / ULTIMATE</small>
+                <h3>Ultimate Anime Bundle</h3>
+                <p>A larger collection for anime editing projects.</p>
+                <div class="pack-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<div class="notice">
+    <h3>About the anime collection</h3>
+    <p>
+        Vanta Sync is an independent editing-resource project.
+        Any third-party artwork or footage used in products
+        must be owned, licensed or otherwise authorized for use.
+    </p>
+</div>
+
+<div class="cta">
+    <h2>CREATE YOUR OWN ANIME ERA.</h2>
+    <p>
+        Explore more editing resources and discover what
+        Vanta Sync has to offer.
+    </p>
+    <a href="vanta-sync.html" class="btn">BACK TO HOME ↗</a>
+</div>
+
+<footer>
+    <div><strong>VANTA SYNC</strong> — Create without limits.</div>
+    <div>Anime Packs / Editing Resources / Creative Tools</div>
+    <div>© 2026 Vanta Sync</div>
+</footer>
+
+</body>
+</html>

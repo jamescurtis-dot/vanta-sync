@@ -1,0 +1,1350 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VANTA SYNC | The Editing Universe</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #05050b;
+    --panel: #0d0d19;
+    --blue: #4777ff;
+    --purple: #9b5cff;
+    --white: #f5f5ff;
+    --muted: #9292a9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: .13;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+}
+
+/* NAVIGATION */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 82px;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5,5,11,.78);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 23px;
+    letter-spacing: 3px;
+}
+
+.logo span {
+    color: var(--blue);
+    text-shadow: 0 0 20px var(--blue);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #aaaabd;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: white;
+    text-shadow: 0 0 15px var(--blue);
+}
+
+.nav-button {
+    padding: 12px 21px;
+    border-radius: 6px;
+    background: linear-gradient(110deg,var(--blue),var(--purple));
+    color: white !important;
+    box-shadow: 0 0 25px rgba(90,100,255,.25);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 25px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 790px;
+    padding: 150px 8% 100px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg,rgba(5,5,11,.98) 0%,rgba(5,5,11,.83) 48%,rgba(5,5,11,.35) 100%),
+        linear-gradient(0deg,var(--bg),transparent 35%),
+        url("images/home-hero.jpg") center/cover;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: var(--blue);
+    filter: blur(180px);
+    opacity: .18;
+    right: 0;
+    top: 10%;
+}
+
+.hero-content {
+    max-width: 750px;
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #9eb5ff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 30px;
+    height: 1px;
+    background: var(--blue);
+    box-shadow: 0 0 10px var(--blue);
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(52px,8vw,105px);
+    line-height: .99;
+    letter-spacing: -5px;
+    font-weight: 900;
+    margin-bottom: 30px;
+}
+
+.hero h1 span {
+    display: block;
+    background: linear-gradient(100deg,#fff 5%,#7da4ff 45%,#bd7aff 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 25px rgba(100,100,255,.23));
+}
+
+.hero-description {
+    max-width: 490px;
+    color: #aaaabd;
+    line-height: 1.9;
+    font-size: 15px;
+    margin-bottom: 37px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 16px 26px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: .3s;
+}
+
+.btn-primary {
+    background: linear-gradient(110deg,var(--blue),var(--purple));
+    box-shadow: 0 0 30px rgba(90,100,255,.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 40px rgba(90,100,255,.55);
+}
+
+.btn-outline {
+    border: 1px solid rgba(255,255,255,.2);
+    background: rgba(255,255,255,.03);
+}
+
+.btn-outline:hover {
+    border-color: var(--blue);
+    background: rgba(71,119,255,.1);
+}
+
+.hero-note {
+    margin-top: 45px;
+    color: #73738b;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+/* FLOATING PREVIEWS */
+
+.floating-card {
+    position: absolute;
+    z-index: 2;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(13,13,25,.75);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 70px rgba(0,0,0,.5);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.float-one {
+    width: 235px;
+    height: 285px;
+    right: 14%;
+    top: 24%;
+    transform: rotate(8deg);
+    animation: float 6s ease-in-out infinite;
+}
+
+.float-two {
+    width: 190px;
+    height: 220px;
+    right: 35%;
+    bottom: 12%;
+    transform: rotate(-9deg);
+    animation: float 7s ease-in-out infinite reverse;
+}
+
+.float-three {
+    width: 170px;
+    height: 115px;
+    right: 7%;
+    bottom: 15%;
+    transform: rotate(5deg);
+    animation: float 5s ease-in-out infinite;
+}
+
+.preview-image {
+    height: 72%;
+    width: 100%;
+    background: linear-gradient(135deg,#17295b,#512a87,#10101b);
+    overflow: hidden;
+}
+
+.preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-label {
+    padding: 13px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.preview-label small {
+    display: block;
+    color: var(--muted);
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+.float-two .preview-image {
+    height: 65%;
+}
+
+.float-three .preview-image {
+    height: 65%;
+}
+
+@keyframes float {
+    0%,100% { margin-top: 0; }
+    50% { margin-top: -18px; }
+}
+
+/* MOVING STRIP */
+
+.marquee {
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: #090916;
+    padding: 22px 0;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+}
+
+.marquee-track span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #a8a8c1;
+    padding: 0 35px;
+    white-space: nowrap;
+}
+
+.marquee-track b {
+    color: var(--blue);
+    margin-right: 35px;
+}
+
+@keyframes marquee {
+    to { transform: translateX(-50%); }
+}
+
+/* SECTION BASICS */
+
+section {
+    padding: 115px 8%;
+}
+
+.section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.section-kicker {
+    color: #8ba9ff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(30px,4vw,49px);
+    line-height: 1.2;
+}
+
+.section-title span {
+    color: #8b83ff;
+}
+
+.section-description {
+    max-width: 380px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* CATEGORY GRID */
+
+.categories {
+    background: linear-gradient(180deg,var(--bg),#090915);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 16px;
+}
+
+.category-card {
+    min-height: 250px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: linear-gradient(145deg,#15152a,#090914);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    transition: .4s;
+}
+
+.category-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--card-image,linear-gradient(135deg,#192d60,#512b78));
+    background-size: cover;
+    background-position: center;
+    opacity: .42;
+    transition: .5s;
+}
+
+.category-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,rgba(5,5,11,.98),transparent 90%);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(110,135,255,.65);
+    box-shadow: 0 15px 40px rgba(67,86,255,.15);
+}
+
+.category-card:hover::before {
+    transform: scale(1.08);
+    opacity: .7;
+}
+
+.category-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.category-number {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    font-family: 'Orbitron',sans-serif;
+    color: rgba(255,255,255,.5);
+    font-size: 12px;
+}
+
+.category-icon {
+    font-size: 25px;
+    margin-bottom: 16px;
+}
+
+.category-card h3 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.category-card p {
+    color: #aaaabd;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.category-arrow {
+    position: absolute;
+    right: 22px;
+    bottom: 25px;
+    color: #a4b5ff;
+    font-size: 20px;
+}
+
+/* FEATURED COLLECTION */
+
+.featured {
+    background:
+        radial-gradient(ellipse at 80% 50%,rgba(90,65,180,.12),transparent 45%),
+        #090915;
+}
+
+.feature-layout {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.feature-art {
+    min-height: 470px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.13);
+    background: linear-gradient(135deg,#172b5c,#512a82,#0b0b18);
+}
+
+.feature-art img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+}
+
+.feature-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,rgba(5,5,11,.7),transparent);
+}
+
+.art-tag {
+    position: absolute;
+    z-index: 2;
+    left: 25px;
+    bottom: 25px;
+    padding: 10px 14px;
+    background: rgba(5,5,11,.7);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.feature-copy h2 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: clamp(32px,4vw,54px);
+    line-height: 1.2;
+    margin-bottom: 22px;
+}
+
+.feature-copy h2 span {
+    color: #8b83ff;
+}
+
+.feature-copy p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.feature-list {
+    list-style: none;
+    margin-bottom: 35px;
+}
+
+.feature-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    color: #c9c9d9;
+    font-size: 13px;
+}
+
+.feature-list li::before {
+    content: "✦";
+    color: var(--blue);
+    margin-right: 12px;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    background: linear-gradient(100deg,#11132a,#141026);
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding: 55px 8%;
+    gap: 25px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: 35px;
+    background: linear-gradient(90deg,#78a0ff,#b77cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.stat p {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 9px;
+}
+
+/* PREMIUM */
+
+.premium {
+    background: var(--bg);
+}
+
+.premium-panel {
+    min-height: 400px;
+    border-radius: 15px;
+    padding: 65px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background:
+        linear-gradient(90deg,rgba(5,5,15,.97),rgba(5,5,15,.65)),
+        url("images/premium-showcase.jpg") center/cover,
+        linear-gradient(120deg,#152b65,#47256c);
+    border: 1px solid rgba(130,120,255,.3);
+}
+
+.premium-panel::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    right: -100px;
+    top: -100px;
+    background: var(--purple);
+    filter: blur(170px);
+    opacity: .3;
+}
+
+.premium-content {
+    max-width: 550px;
+    position: relative;
+    z-index: 2;
+}
+
+.premium-content h2 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: clamp(35px,5vw,60px);
+    line-height: 1.15;
+    margin: 18px 0;
+}
+
+.premium-content h2 span {
+    color: #a78bff;
+}
+
+.premium-content p {
+    color: #b1b1c5;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* FREE RESOURCES */
+
+.free-section {
+    background: #090915;
+}
+
+.free-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.free-card {
+    padding: 30px;
+    border-radius: 10px;
+    background: #10101e;
+    border: 1px solid rgba(255,255,255,.08);
+    transition: .3s;
+}
+
+.free-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(100,125,255,.5);
+}
+
+.free-card .symbol {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.free-card h3 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.free-card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.text-link {
+    color: #91a8ff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* FINAL CTA */
+
+.final-cta {
+    text-align: center;
+    padding: 130px 8%;
+    background:
+        radial-gradient(ellipse at 50% 100%,rgba(93,65,180,.22),transparent 60%),
+        var(--bg);
+}
+
+.final-cta h2 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: clamp(35px,6vw,68px);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.final-cta h2 span {
+    color: #8d8aff;
+}
+
+.final-cta p {
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 65px 8% 25px;
+    background: #07070e;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-bottom: 50px;
+}
+
+.footer-brand {
+    max-width: 300px;
+}
+
+.footer-brand p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    margin-top: 18px;
+}
+
+.footer-links h4 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin: 12px 0;
+    transition: .3s;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    color: #66667a;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* REVEAL ANIMATION */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+    .nav-links {
+        gap: 14px;
+    }
+
+    .nav-links a {
+        font-size: 10px;
+    }
+
+    .float-one {
+        right: 8%;
+    }
+
+    .float-two {
+        right: 29%;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:760px) {
+    .navbar {
+        height: 72px;
+        padding: 0 6%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        padding: 20px 7%;
+        background: rgba(5,5,11,.98);
+        border-bottom: 1px solid rgba(255,255,255,.1);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 800px;
+        padding: 140px 7% 80px;
+        align-items: flex-start;
+        background-position: 60% center;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .floating-card {
+        opacity: .8;
+    }
+
+    .float-one {
+        width: 145px;
+        height: 190px;
+        right: 8%;
+        top: auto;
+        bottom: 10%;
+    }
+
+    .float-two {
+        width: 125px;
+        height: 155px;
+        right: 48%;
+        bottom: 8%;
+    }
+
+    .float-three {
+        display: none;
+    }
+
+    section {
+        padding: 80px 7%;
+    }
+
+    .section-top {
+        display: block;
+    }
+
+    .section-description {
+        margin-top: 18px;
+    }
+
+    .feature-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-art {
+        min-height: 330px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+        padding: 40px 7%;
+    }
+
+    .stat h3 {
+        font-size: 28px;
+    }
+
+    .premium-panel {
+        padding: 40px 25px;
+    }
+
+    .free-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .final-cta {
+        padding: 90px 7%;
+    }
+}
+
+@media(max-width:450px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        min-height: 220px;
+    }
+
+    .hero {
+        min-height: 850px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header class="navbar">
+    <a href="vanta-sync.html" class="logo">VANTA<span>.</span>SYNC</a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+
+    <nav class="nav-links" id="navLinks">
+        <a href="vanta-sync.html">HOME</a>
+        <a href="audio.html">AUDIO</a>
+        <a href="twixtors.html">TWIXTORS</a>
+        <a href="clips.html">CLIPS</a>
+        <a href="overlays.html">OVERLAYS</a>
+        <a href="effects.html">EFFECTS</a>
+        <a href="transitions.html">TRANSITIONS</a>
+        <a href="anime-packs.html">ANIME PACKS</a>
+        <a href="free-downloads.html">FREE</a>
+        <a href="premium-packs.html" class="nav-button">PREMIUM ↗</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+
+<main>
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">WELCOME TO THE CREATIVE UNIVERSE</div>
+
+        <h1>
+            YOUR EDITS.
+            <span>YOUR ERA.</span>
+        </h1>
+
+        <p class="hero-description">
+            Everything you need to transform ordinary edits into something unforgettable.
+            Explore premium resources, creative assets and tools built for the next generation
+            of creators.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#categories" class="btn btn-primary">EXPLORE THE UNIVERSE ↗</a>
+            <a href="free-downloads.html" class="btn btn-outline">GET FREE RESOURCES</a>
+        </div>
+
+        <div class="hero-note">CREATE WITHOUT LIMITS. EDIT WITHOUT RULES.</div>
+    </div>
+
+    <div class="floating-card float-one">
+        <div class="preview-image">
+            <img src="images/home-preview-1.jpg" alt="Creative resource preview" onerror="this.style.display='none'">
+        </div>
+        <div class="preview-label">
+            VISUAL COLLECTION
+            <small>Creative assets</small>
+        </div>
+    </div>
+
+    <div class="floating-card float-two">
+        <div class="preview-image">
+            <img src="images/home-preview-2.jpg" alt="Editing pack preview" onerror="this.style.display='none'">
+        </div>
+        <div class="preview-label">
+            EDITOR'S TOOLKIT
+            <small>Made for creators</small>
+        </div>
+    </div>
+
+    <div class="floating-card float-three">
+        <div class="preview-image">
+            <img src="images/home-preview-3.jpg" alt="Digital pack preview" onerror="this.style.display='none'">
+        </div>
+        <div class="preview-label">NEXT LEVEL VISUALS</div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+
+<div class="marquee">
+    <div class="marquee-track">
+        <span>VANTA SYNC <b>✦</b> CREATE <b>✦</b> EXPERIMENT <b>✦</b> ELEVATE <b>✦</b> REDEFINE <b>✦</b></span>
+        <span>VANTA SYNC <b>✦</b> CREATE <b>✦</b> EXPERIMENT <b>✦</b> ELEVATE <b>✦</b> REDEFINE <b>✦</b></span>
+    </div>
+</div>
+
+<!-- CATEGORIES -->
+
+<section class="categories" id="categories">
+    <div class="section-top reveal">
+        <div>
+            <div class="section-kicker">01 / EXPLORE</div>
+            <h2 class="section-title">THE CREATOR'S<br><span>PLAYGROUND.</span></h2>
+        </div>
+        <p class="section-description">
+            From sound design to cinematic visuals, discover the resources
+            that bring your creative ideas to life.
+        </p>
+    </div>
+
+    <div class="category-grid">
+
+        <a href="audio.html" class="category-card reveal" style="--card-image:url('images/audio-banner.jpg')">
+            <span class="category-number">01</span>
+            <div class="category-icon">♫</div>
+            <h3>AUDIO</h3>
+            <p>Sound effects, beats and audio essentials.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+        <a href="twixtors.html" class="category-card reveal" style="--card-image:url('images/twixtors-banner.jpg')">
+            <span class="category-number">02</span>
+            <div class="category-icon">◈</div>
+            <h3>TWIXTORS</h3>
+            <p>Motion resources for smoother edits.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+        <a href="clips.html" class="category-card reveal" style="--card-image:url('images/clips-banner.jpg')">
+            <span class="category-number">03</span>
+            <div class="category-icon">▣</div>
+            <h3>CLIPS</h3>
+            <p>Visual footage for your next project.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+        <a href="overlays.html" class="category-card reveal" style="--card-image:url('images/overlays-banner.jpg')">
+            <span class="category-number">04</span>
+            <div class="category-icon">✧</div>
+            <h3>OVERLAYS</h3>
+            <p>Textures, lighting and visual details.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+        <a href="effects.html" class="category-card reveal" style="--card-image:url('images/effects-banner.jpg')">
+            <span class="category-number">05</span>
+            <div class="category-icon">⚡</div>
+            <h3>VISUAL EFFECTS</h3>
+            <p>Bring energy and impact to every frame.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+        <a href="transitions.html" class="category-card reveal" style="--card-image:url('images/transitions-banner.jpg')">
+            <span class="category-number">06</span>
+            <div class="category-icon">⟡</div>
+            <h3>TRANSITIONS</h3>
+            <p>Make every scene change feel seamless.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+        <a href="anime-packs.html" class="category-card reveal" style="--card-image:url('images/anime-packs-banner.jpg')">
+            <span class="category-number">07</span>
+            <div class="category-icon">◉</div>
+            <h3>ANIME PACKS</h3>
+            <p>Collections for anime-inspired creations.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+        <a href="premium-packs.html" class="category-card reveal" style="--card-image:url('images/premium-banner.jpg')">
+            <span class="category-number">08</span>
+            <div class="category-icon">✦</div>
+            <h3>PREMIUM PACKS</h3>
+            <p>Curated collections for serious creators.</p>
+            <span class="category-arrow">↗</span>
+        </a>
+
+    </div>
+</section>
+
+<!-- FEATURED -->
+
+<section class="featured">
+    <div class="feature-layout">
+        <div class="feature-art reveal">
+            <img src="images/home-featured.jpg" alt="Vanta Sync featured collection" onerror="this.style.display='none'">
+            <div class="art-tag">VANTA SYNC / FEATURED COLLECTION</div>
+        </div>
+
+        <div class="feature-copy reveal">
+            <div class="section-kicker">02 / THE EXPERIENCE</div>
+            <h2>MORE THAN<br>JUST <span>RESOURCES.</span></h2>
+            <p>
+                Your creativity deserves more than ordinary tools.
+                Discover collections designed to give your projects
+                a distinctive look, stronger atmosphere and more
+                room to experiment.
+            </p>
+
+            <ul class="feature-list">
+                <li>Creative resources in one place</li>
+                <li>Collections for different editing styles</li>
+                <li>Free resources to get started</li>
+                <li>Premium collections to explore</li>
+            </ul>
+
+            <a href="clips.html" class="btn btn-primary">DISCOVER COLLECTIONS ↗</a>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+
+<div class="stats">
+    <div class="stat reveal">
+        <h3>08+</h3>
+        <p>RESOURCE CATEGORIES</p>
+    </div>
+    <div class="stat reveal">
+        <h3>01</h3>
+        <p>CREATIVE UNIVERSE</p>
+    </div>
+    <div class="stat reveal">
+        <h3>∞</h3>
+        <p>CREATIVE POSSIBILITIES</p>
+    </div>
+    <div class="stat reveal">
+        <h3>24/7</h3>
+        <p>INSPIRATION MODE</p>
+    </div>
+</div>
+
+<!-- PREMIUM -->
+
+<section class="premium">
+    <div class="premium-panel reveal">
+        <div class="premium-content">
+            <div class="section-kicker">03 / THE NEXT LEVEL</div>
+            <h2>ENTER THE<br><span>PREMIUM ERA.</span></h2>
+            <p>
+                Explore curated editing collections and creative bundles
+                built to give your projects a fresh direction.
+            </p>
+            <a href="premium-packs.html" class="btn btn-primary">EXPLORE PREMIUM ↗</a>
+        </div>
+    </div>
+</section>
+
+<!-- FREE RESOURCES -->
+
+<section class="free-section">
+    <div class="section-top reveal">
+        <div>
+            <div class="section-kicker">04 / START HERE</div>
+            <h2 class="section-title">CREATE MORE.<br><span>SPEND ZERO.</span></h2>
+        </div>
+        <p class="section-description">
+            Start exploring with free creative resources.
+            Build your workflow and experiment with new styles.
+        </p>
+    </div>
+
+    <div class="free-grid">
+        <div class="free-card reveal">
+            <div class="symbol">♫</div>
+            <h3>SOUND STARTER</h3>
+            <p>Explore audio resources for your editing projects.</p>
+            <a href="audio.html" class="text-link">EXPLORE AUDIO ↗</a>
+        </div>
+
+        <div class="free-card reveal">
+            <div class="symbol">✧</div>
+            <h3>VISUAL STARTER</h3>
+            <p>Discover overlays and visual effects for your edits.</p>
+            <a href="overlays.html" class="text-link">EXPLORE VISUALS ↗</a>
+        </div>
+
+        <div class="free-card reveal">
+            <div class="symbol">⬡</div>
+            <h3>FREE DOWNLOADS</h3>
+            <p>Find free resources to experiment and get started.</p>
+            <a href="free-downloads.html" class="text-link">GET FREE RESOURCES ↗</a>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+
+<section class="final-cta">
+    <div class="section-kicker reveal">05 / YOUR NEXT MOVE</div>
+    <h2 class="reveal">READY TO MAKE<br><span>IT DIFFERENT?</span></h2>
+    <p class="reveal">
+        Your next creative project starts here.
+        Explore the Vanta Sync universe and find your next inspiration.
+    </p>
+    <a href="free-downloads.html" class="btn btn-primary reveal">START EXPLORING ↗</a>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <a href="vanta-sync.html" class="logo">VANTA<span>.</span>SYNC</a>
+            <p>
+                A creative universe for editors, designers and creators.
+                Explore resources, experiment with ideas and make something different.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h4>EXPLORE</h4>
+            <a href="audio.html">Audio</a>
+            <a href="twixtors.html">Twixtors</a>
+            <a href="clips.html">Clips</a>
+            <a href="overlays.html">Overlays</a>
+        </div>
+
+        <div class="footer-links">
+            <h4>DISCOVER</h4>
+            <a href="effects.html">Effects</a>
+            <a href="transitions.html">Transitions</a>
+            <a href="anime-packs.html">Anime Packs</a>
+            <a href="premium-packs.html">Premium Packs</a>
+        </div>
+
+        <div class="footer-links">
+            <h4>MORE</h4>
+            <a href="free-downloads.html">Free Downloads</a>
+            <a href="#categories">All Categories</a>
+            <a href="vanta-sync.html">Home</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <span>© 2026 VANTA SYNC. ALL RIGHTS RESERVED.</span>
+        <span>BUILT FOR THE CREATIVE MINDS.</span>
+    </div>
+</footer>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+    menuToggle.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.textContent = "☰";
+    });
+});
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+    revealObserver.observe(element);
+});
+</script>
+
+</body>
+</html>

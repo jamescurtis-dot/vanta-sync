@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clips | Vanta Sync</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --blue: #00c8ff;
+    --purple: #9b5cff;
+    --bg: #070710;
+    --panel: #111120;
+    --muted: #a3a3bb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: Inter, sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 10% 20%, #007bff20, transparent 30%),
+        radial-gradient(circle at 90% 50%, #9b5cff20, transparent 35%);
+}
+
+/* NAVIGATION */
+
+nav {
+    position: sticky;
+    top: 12px;
+    z-index: 100;
+    width: 94%;
+    max-width: 1250px;
+    margin: 15px auto;
+    padding: 15px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    background: #10101de8;
+    border: 1px solid #34345b;
+    border-radius: 18px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 25px #007bff15;
+}
+
+.logo {
+    font-family: Orbitron, sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #c3c3d6;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--blue);
+    text-shadow: 0 0 12px var(--blue);
+}
+
+/* HERO */
+
+.hero {
+    width: 94%;
+    max-width: 1250px;
+    min-height: 410px;
+    margin: 35px auto 75px;
+    padding: 55px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 28px;
+    border: 1px solid #333b72;
+    background:
+        linear-gradient(100deg, #080817 15%, #10102bdc 55%, #17102de0),
+        url("images/clips-banner.jpg") center/cover;
+    box-shadow: 0 0 45px #006eff20;
+}
+
+.hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    color: var(--blue);
+    letter-spacing: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(38px, 6vw, 70px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 510px;
+    font-size: 14px;
+}
+
+.primary-btn {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 25px;
+    border-radius: 10px;
+    background: linear-gradient(100deg, #007dff, #8646ff);
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 0 25px #536bff55;
+    transition: .3s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px #536bff99;
+}
+
+/* GENERAL SECTIONS */
+
+section {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto 85px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.heading h2 {
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(21px, 3vw, 30px);
+}
+
+.heading p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 9px;
+}
+
+/* FEATURED CONTENT */
+
+.featured {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+}
+
+.feature-preview {
+    min-height: 330px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid #35355d;
+    background: linear-gradient(135deg, #10254b, #261344);
+}
+
+.feature-preview img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+}
+
+.feature-preview::after {
+    content: "";
+    position: absolute;
+    inset: 35% 0 0;
+    background: linear-gradient(transparent, #070710);
+}
+
+.feature-text {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    z-index: 2;
+}
+
+.feature-text small {
+    color: var(--blue);
+    letter-spacing: 3px;
+    font-weight: 800;
+}
+
+.feature-text h3 {
+    font-family: Orbitron, sans-serif;
+    font-size: 23px;
+    margin-top: 10px;
+}
+
+.feature-side {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.side-card {
+    flex: 1;
+    padding: 25px;
+    border: 1px solid #35355d;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #101b37, #211138);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: .3s;
+}
+
+.side-card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 0 20px #007dff20;
+}
+
+.side-card h3 {
+    font-family: Orbitron, sans-serif;
+    font-size: 17px;
+}
+
+.side-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-top: 10px;
+}
+
+/* FILTER DISPLAY */
+
+.filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.filter {
+    padding: 10px 17px;
+    border: 1px solid #37375c;
+    border-radius: 30px;
+    background: #111120;
+    color: #c7c7dc;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.filter.active {
+    background: linear-gradient(100deg, #087cff, #824bff);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 0 18px #536bff44;
+}
+
+/* ALIGNED CLIP GALLERY */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 240px;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.clip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid #303052;
+    border-radius: 17px;
+    background: linear-gradient(135deg, #10264b, #261344);
+    transition: border-color .3s, box-shadow .3s;
+}
+
+.clip:hover {
+    border-color: var(--blue);
+    box-shadow: 0 0 22px #007dff30;
+}
+
+.clip img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    transition: transform .4s;
+}
+
+.clip:hover img {
+    transform: scale(1.05);
+}
+
+.clip::after {
+    content: "";
+    position: absolute;
+    inset: 40% 0 0;
+    background: linear-gradient(transparent, #080817e8);
+    pointer-events: none;
+}
+
+.clip-label {
+    position: absolute;
+    bottom: 16px;
+    left: 15px;
+    z-index: 2;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.play {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #080817bb;
+    border: 1px solid #7774ff;
+    color: var(--blue);
+    z-index: 3;
+}
+
+/* COLLECTION CARDS */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background: var(--panel);
+    border: 1px solid #292944;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-6px);
+    border-color: var(--purple);
+    box-shadow: 0 0 24px #9b5cff20;
+}
+
+.product-image {
+    height: 180px;
+    background: linear-gradient(135deg, #10254b, #261344);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 19px;
+}
+
+.product-info h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.product-info p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.product-btn {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: #171b35;
+    border: 1px solid #4545a0;
+    border-radius: 8px;
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid #24243d;
+    padding: 35px 5%;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer strong {
+    color: var(--blue);
+    font-family: Orbitron, sans-serif;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media(max-width: 850px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .nav-links {
+        justify-content: flex-start;
+        gap: 13px;
+    }
+
+    .hero {
+        padding: 40px 25px;
+    }
+
+    .featured {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 220px;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media(max-width: 550px) {
+    .gallery,
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        grid-auto-rows: 240px;
+    }
+
+    .heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero {
+        min-height: 350px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">VANTA<span>SYNC</span></div>
+
+    <div class="nav-links">
+        <a href="vanta-sync.html">Home</a>
+        <a href="audio.html">Audio</a>
+        <a href="twixtors.html">Twixtors</a>
+        <a href="clips.html" class="active">Clips</a>
+        <a href="overlays.html">Overlays</a>
+        <a href="effects.html">Effects</a>
+        <a href="transitions.html">Transitions</a>
+        <a href="anime-packs.html">Anime</a>
+        <a href="free-downloads.html">Free</a>
+        <a href="premium-packs.html">Premium</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">VANTA SYNC / VIDEO LIBRARY</div>
+
+        <h1>CAPTURE THE <span>MOMENT.</span></h1>
+
+        <p>
+            Discover cinematic clips, gaming moments and visual
+            resources for your next creative project.
+            Find your next scene right here.
+        </p>
+
+        <a href="#collection" class="primary-btn">
+            EXPLORE CLIPS ↗
+        </a>
+    </div>
+</header>
+
+<section>
+    <div class="heading">
+        <div>
+            <h2>FEATURED CONTENT</h2>
+            <p>Explore the latest highlights from the clip library.</p>
+        </div>
+    </div>
+
+    <div class="featured">
+
+        <div class="feature-preview">
+            <img src="images/featured-clip.jpg"
+                 alt="Featured clip"
+                 onerror="this.style.display='none'">
+
+            <div class="feature-text">
+                <small>FEATURED COLLECTION</small>
+                <h3>THE VISUAL ARCHIVE</h3>
+            </div>
+        </div>
+
+        <div class="feature-side">
+            <div class="side-card">
+                <h3>GAMING MOMENTS</h3>
+                <p>Find clips for montages, highlights and gaming edits.</p>
+            </div>
+
+            <div class="side-card">
+                <h3>CINEMATIC SCENES</h3>
+                <p>Visual resources for storytelling and creative projects.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="heading">
+        <div>
+            <h2>CLIP GALLERY</h2>
+            <p>A visual preview of the library.</p>
+        </div>
+    </div>
+
+    <div class="filters">
+        <span class="filter active">ALL CLIPS</span>
+        <span class="filter">GAMING</span>
+        <span class="filter">ANIME</span>
+        <span class="filter">CINEMATIC</span>
+    </div>
+
+    <div class="gallery">
+
+        <div class="clip">
+            <img src="images/clip-1.jpg" alt="Gaming highlights"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Gaming Highlights</div>
+        </div>
+
+        <div class="clip">
+            <img src="images/clip-2.jpg" alt="Cinematic scenes"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Cinematic Scenes</div>
+        </div>
+
+        <div class="clip">
+            <img src="images/clip-3.jpg" alt="Anime moments"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Anime Moments</div>
+        </div>
+
+        <div class="clip">
+            <img src="images/clip-4.jpg" alt="Action clips"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Action Clips</div>
+        </div>
+
+        <div class="clip">
+            <img src="images/clip-5.jpg" alt="Visual archive"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Visual Archive</div>
+        </div>
+
+        <div class="clip">
+            <img src="images/clip-6.jpg" alt="Montage clips"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Montage Clips</div>
+        </div>
+
+        <div class="clip">
+            <img src="images/clip-7.jpg" alt="Special moments"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Special Moments</div>
+        </div>
+
+        <div class="clip">
+            <img src="images/clip-8.jpg" alt="Edit resources"
+                 onerror="this.style.display='none'">
+            <span class="play">▶</span>
+            <div class="clip-label">Edit Resources</div>
+        </div>
+
+    </div>
+</section>
+
+<section id="collection">
+    <div class="heading">
+        <div>
+            <h2>CLIP COLLECTIONS</h2>
+            <p>Browse available clip packs and resources.</p>
+        </div>
+    </div>
+
+    <div class="products">
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/clips-pack-1.jpg"
+                     alt="Gaming clips pack"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Gaming Clip Pack</h3>
+                <p>Clips for gaming montages and highlight edits.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/clips-pack-2.jpg"
+                     alt="Anime clips pack"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Anime Clip Pack</h3>
+                <p>Anime scenes and creative editing resources.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/clips-pack-3.jpg"
+                     alt="Cinematic clips pack"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Cinematic Clip Pack</h3>
+                <p>Visual scenes for cinematic projects.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<footer>
+    <strong>VANTA SYNC</strong>
+    <p style="margin-top:10px">Create beyond limits.</p>
+    <p style="margin-top:12px">© 2026 Vanta Sync. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

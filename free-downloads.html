@@ -1,0 +1,725 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Downloads | Vanta Sync</title>
+
+<style>
+:root {
+    --blue: #00c8ff;
+    --purple: #9b5cff;
+    --bg: #050610;
+    --panel: #0d1121;
+    --muted: #9ba8c4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a { text-decoration: none; color: inherit; }
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 6%;
+    background: rgba(5,6,16,.95);
+    border-bottom: 1px solid rgba(0,200,255,.2);
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.logo span { color: var(--blue); }
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 17px;
+}
+
+.nav-links a {
+    color: #aab4ca;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--blue);
+    text-shadow: 0 0 12px var(--blue);
+}
+
+.hero {
+    min-height: 550px;
+    padding: 95px 8%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, #050610 5%, rgba(5,6,16,.86) 55%, rgba(5,6,16,.25)),
+        url("images/free-downloads-banner.jpg") center/cover,
+        radial-gradient(circle at 80% 40%, #28205c, #050610 65%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+}
+
+.eyebrow {
+    color: var(--blue);
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 8vw, 90px);
+    line-height: .98;
+    letter-spacing: -4px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #b1bad0;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 25px 0 32px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 25px;
+    border-radius: 5px;
+    background: linear-gradient(100deg, #00bfff, #8155ff);
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 0 25px rgba(0,160,255,.25);
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px rgba(0,160,255,.5);
+}
+
+section { padding: 80px 7%; }
+
+.heading { margin-bottom: 35px; }
+
+.heading small {
+    color: var(--blue);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.heading h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-top: 12px;
+}
+
+.heading p {
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.featured {
+    background: #080b19;
+}
+
+.feature-card {
+    min-height: 270px;
+    border-radius: 13px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border: 1px solid rgba(0,200,255,.25);
+    background:
+        linear-gradient(110deg, rgba(5,6,16,.95), rgba(13,20,45,.75)),
+        url("images/free-featured.jpg") center/cover,
+        linear-gradient(135deg, #102d4d, #30205a);
+}
+
+.feature-text { max-width: 550px; }
+
+.feature-text small {
+    color: var(--blue);
+    letter-spacing: 3px;
+    font-size: 11px;
+}
+
+.feature-text h3 {
+    font-size: clamp(25px, 4vw, 38px);
+    margin: 14px 0;
+}
+
+.feature-text p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 23px;
+}
+
+.free-tag {
+    display: inline-block;
+    padding: 10px 17px;
+    border: 1px solid var(--blue);
+    border-radius: 30px;
+    color: var(--blue);
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
+
+.category {
+    background: var(--panel);
+    border: 1px solid rgba(155,92,255,.2);
+    padding: 23px 14px;
+    text-align: center;
+    border-radius: 9px;
+    transition: .3s;
+}
+
+.category:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue);
+    box-shadow: 0 0 24px rgba(0,200,255,.12);
+}
+
+.category .symbol {
+    font-size: 26px;
+    margin-bottom: 12px;
+}
+
+.category h3 { font-size: 14px; }
+
+.category p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+.library {
+    background:
+        radial-gradient(circle at 90% 30%, rgba(155,92,255,.08), transparent 35%),
+        #070914;
+}
+
+.library-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.library-top .heading { margin-bottom: 0; }
+
+.search-box {
+    width: 260px;
+    max-width: 100%;
+    padding: 13px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,200,255,.3);
+    background: #0d1121;
+    color: white;
+    outline: none;
+}
+
+.search-box:focus { border-color: var(--blue); }
+
+.download-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.download-card {
+    background: #0d1121;
+    border: 1px solid rgba(155,92,255,.2);
+    border-radius: 11px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.download-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue);
+    box-shadow: 0 12px 30px rgba(0,150,255,.1);
+}
+
+.download-image {
+    height: 170px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #102d4d, #342052, #080b19);
+}
+
+.download-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.download-image span {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    padding: 7px 11px;
+    background: rgba(0,0,0,.75);
+    border: 1px solid var(--blue);
+    border-radius: 20px;
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.download-info { padding: 20px; }
+
+.download-info small {
+    color: var(--blue);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.download-info h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.download-info p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 42px;
+}
+
+.download-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 19px;
+}
+
+.download-bottom span {
+    color: #6de7ff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.download-bottom a {
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.download-bottom a:hover { color: var(--purple); }
+
+.empty-message {
+    display: none;
+    color: var(--muted);
+    padding: 30px 0;
+}
+
+.info-strip {
+    margin: 0 7% 80px;
+    padding: 30px;
+    border-left: 3px solid var(--blue);
+    background: #0c1020;
+    border-radius: 5px;
+}
+
+.info-strip h3 { margin-bottom: 10px; }
+
+.info-strip p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.cta {
+    margin: 0 7% 85px;
+    padding: 60px 30px;
+    text-align: center;
+    border: 1px solid rgba(0,200,255,.3);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(0,200,255,.14), transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(155,92,255,.16), transparent 40%),
+        #0c1020;
+}
+
+.cta h2 {
+    font-size: clamp(27px, 4vw, 42px);
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: var(--muted);
+    max-width: 550px;
+    margin: 0 auto 25px;
+    line-height: 1.7;
+}
+
+footer {
+    padding: 35px 7%;
+    border-top: 1px solid rgba(0,200,255,.15);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: #7e8aa5;
+    font-size: 12px;
+}
+
+footer strong { color: white; }
+
+@media(max-width: 900px) {
+    .categories { grid-template-columns: repeat(3, 1fr); }
+    .nav-links { gap: 11px; }
+    .nav-links a { font-size: 11px; }
+}
+
+@media(max-width: 650px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero {
+        min-height: 470px;
+        padding: 75px 7%;
+    }
+
+    .hero h1 { letter-spacing: -2px; }
+
+    section { padding: 65px 6%; }
+
+    .categories { grid-template-columns: repeat(2, 1fr); }
+
+    .download-grid { grid-template-columns: 1fr; }
+
+    .feature-card { padding: 28px; }
+
+    .info-strip,
+    .cta { margin-left: 6%; margin-right: 6%; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="vanta-sync.html" class="logo">VANTA<span>SYNC</span></a>
+
+    <div class="nav-links">
+        <a href="vanta-sync.html">Home</a>
+        <a href="audio.html">Audio</a>
+        <a href="twixtors.html">Twixtors</a>
+        <a href="clips.html">Clips</a>
+        <a href="overlays.html">Overlays</a>
+        <a href="effects.html">Effects</a>
+        <a href="transitions.html">Transitions</a>
+        <a href="anime-packs.html">Anime Packs</a>
+        <a href="free-downloads.html" class="active">Free Downloads</a>
+        <a href="premium-packs.html">Premium Packs</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">VANTA SYNC / FREE RESOURCE LIBRARY</div>
+        <h1>CREATE MORE.<br><span>SPEND ZERO.</span></h1>
+        <p>
+            Discover free editing resources, creative assets
+            and starter packs. Explore the library and find
+            something useful for your next project.
+        </p>
+        <a href="#library" class="btn">EXPLORE FREE RESOURCES ↗</a>
+    </div>
+</header>
+
+<section class="featured">
+    <div class="heading">
+        <small>THE FREE COLLECTION</small>
+        <h2>Start creating today.</h2>
+        <p>
+            A dedicated space for free resources and creative
+            tools to help editors get started.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-text">
+            <small>VANTA STARTER COLLECTION</small>
+            <h3>Your editing journey starts here.</h3>
+            <p>
+                Explore beginner-friendly resources and discover
+                new ways to build your editing style.
+            </p>
+            <a href="#library" class="btn">BROWSE THE LIBRARY ↗</a>
+        </div>
+
+        <div class="free-tag">100% FREE SECTION</div>
+    </div>
+</section>
+
+<section>
+    <div class="heading">
+        <small>BROWSE THE LIBRARY</small>
+        <h2>Find your resources.</h2>
+        <p>Explore the free collection by resource type.</p>
+    </div>
+
+    <div class="categories">
+        <div class="category">
+            <div class="symbol">♫</div>
+            <h3>Audio</h3>
+            <p>Sounds and audio assets</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">▣</div>
+            <h3>Overlays</h3>
+            <p>Visual editing layers</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">✦</div>
+            <h3>Effects</h3>
+            <p>Creative visual effects</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">↗</div>
+            <h3>Transitions</h3>
+            <p>Movement resources</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">▶</div>
+            <h3>Clips</h3>
+            <p>Editing footage</p>
+        </div>
+    </div>
+</section>
+
+<section class="library" id="library">
+    <div class="library-top">
+        <div class="heading">
+            <small>DOWNLOAD CENTER</small>
+            <h2>Free resources.</h2>
+            <p>Search the collection for something useful.</p>
+        </div>
+
+        <input
+            type="text"
+            id="resourceSearch"
+            class="search-box"
+            placeholder="Search resources..."
+            oninput="searchResources()"
+        >
+    </div>
+
+    <div class="download-grid" id="downloadGrid">
+
+        <article class="download-card">
+            <div class="download-image">
+                <img src="images/free-pack-1.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span>FREE</span>
+            </div>
+            <div class="download-info">
+                <small>AUDIO / STARTER</small>
+                <h3>Starter Sound Pack</h3>
+                <p>A starter collection of audio resources for editing.</p>
+                <div class="download-bottom">
+                    <span>FREE</span>
+                    <a href="#" >GET RESOURCE ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="download-card">
+            <div class="download-image">
+                <img src="images/free-pack-2.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span>FREE</span>
+            </div>
+            <div class="download-info">
+                <small>OVERLAYS / VISUALS</small>
+                <h3>Basic Overlay Pack</h3>
+                <p>A collection of visual overlays for creative projects.</p>
+                <div class="download-bottom">
+                    <span>FREE</span>
+                    <a href="#">GET RESOURCE ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="download-card">
+            <div class="download-image">
+                <img src="images/free-pack-3.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span>FREE</span>
+            </div>
+            <div class="download-info">
+                <small>EFFECTS / VISUALS</small>
+                <h3>FX Starter Collection</h3>
+                <p>Starter visual effects for different editing styles.</p>
+                <div class="download-bottom">
+                    <span>FREE</span>
+                    <a href="#">GET RESOURCE ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="download-card">
+            <div class="download-image">
+                <img src="images/free-pack-4.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span>FREE</span>
+            </div>
+            <div class="download-info">
+                <small>TRANSITIONS / MOTION</small>
+                <h3>Motion Starter Pack</h3>
+                <p>Transition resources for smooth editing sequences.</p>
+                <div class="download-bottom">
+                    <span>FREE</span>
+                    <a href="#">GET RESOURCE ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="download-card">
+            <div class="download-image">
+                <img src="images/free-pack-5.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span>FREE</span>
+            </div>
+            <div class="download-info">
+                <small>CLIPS / FOOTAGE</small>
+                <h3>Starter Clip Collection</h3>
+                <p>A starter set of footage for editing practice.</p>
+                <div class="download-bottom">
+                    <span>FREE</span>
+                    <a href="#">GET RESOURCE ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="download-card">
+            <div class="download-image">
+                <img src="images/free-pack-6.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span>FREE</span>
+            </div>
+            <div class="download-info">
+                <small>ANIME / VISUALS</small>
+                <h3>Anime Edit Starter Pack</h3>
+                <p>Free resources for practicing anime-style edits.</p>
+                <div class="download-bottom">
+                    <span>FREE</span>
+                    <a href="#">GET RESOURCE ↗</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <p class="empty-message" id="emptyMessage">
+        No matching resources found. Try another search.
+    </p>
+</section>
+
+<div class="info-strip">
+    <h3>Before downloading</h3>
+    <p>
+        Resource cards are currently placeholders. Actual downloads
+        will be connected once the files are ready. Check the
+        usage permissions for each resource before using it in
+        commercial projects.
+    </p>
+</div>
+
+<div class="cta">
+    <h2>WANT MORE RESOURCES?</h2>
+    <p>
+        Explore the full Vanta Sync collection and discover
+        more editing tools and creative packs.
+    </p>
+    <a href="premium-packs.html" class="btn">EXPLORE PREMIUM PACKS ↗</a>
+</div>
+
+<footer>
+    <div><strong>VANTA SYNC</strong> — Create without limits.</div>
+    <div>Free Downloads / Editing Resources / Creative Tools</div>
+    <div>© 2026 Vanta Sync</div>
+</footer>
+
+<script>
+function searchResources() {
+    const input = document
+        .getElementById("resourceSearch")
+        .value.toLowerCase();
+
+    const cards = document.querySelectorAll(".download-card");
+    let visible = 0;
+
+    cards.forEach(card => {
+        const matches = card.innerText.toLowerCase().includes(input);
+
+        card.style.display = matches ? "block" : "none";
+
+        if (matches) visible++;
+    });
+
+    document.getElementById("emptyMessage").style.display =
+        visible === 0 ? "block" : "none";
+}
+</script>
+
+</body>
+</html>

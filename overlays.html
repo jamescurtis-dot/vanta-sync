@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overlays | Vanta Sync</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --blue: #00c8ff;
+    --purple: #9b5cff;
+    --bg: #070710;
+    --panel: #111120;
+    --muted: #a3a3bb;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+    background:var(--bg);
+    color:white;
+    font-family:Inter,sans-serif;
+    overflow-x:hidden;
+}
+
+body::before {
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:
+        radial-gradient(circle at 10% 20%,#007bff20,transparent 30%),
+        radial-gradient(circle at 90% 50%,#9b5cff20,transparent 35%);
+}
+
+/* NAVIGATION */
+
+nav {
+    position:sticky;
+    top:12px;
+    z-index:100;
+    width:94%;
+    max-width:1250px;
+    margin:15px auto;
+    padding:15px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    background:#10101de8;
+    border:1px solid #34345b;
+    border-radius:18px;
+    backdrop-filter:blur(18px);
+    box-shadow:0 0 25px #007bff15;
+}
+
+.logo {
+    font-family:Orbitron,sans-serif;
+    font-size:19px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.logo span { color:var(--blue); }
+
+.nav-links {
+    display:flex;
+    align-items:center;
+    gap:17px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.nav-links a {
+    color:#c3c3d6;
+    text-decoration:none;
+    font-size:12px;
+    transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color:var(--blue);
+    text-shadow:0 0 12px var(--blue);
+}
+
+/* HERO */
+
+.hero {
+    width:94%;
+    max-width:1250px;
+    min-height:410px;
+    margin:35px auto 75px;
+    padding:55px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    border:1px solid #343b72;
+    border-radius:28px;
+    background:
+        linear-gradient(100deg,#080817 15%,#10102bdc 55%,#17102de0),
+        url("images/overlays-banner.jpg") center/cover;
+    box-shadow:0 0 45px #006eff20;
+}
+
+.hero::after {
+    content:"LAYERS";
+    position:absolute;
+    right:-10px;
+    bottom:10px;
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(65px,12vw,150px);
+    font-weight:800;
+    color:#ffffff08;
+    pointer-events:none;
+}
+
+.hero-content {
+    max-width:650px;
+    position:relative;
+    z-index:2;
+}
+
+.eyebrow {
+    color:var(--blue);
+    letter-spacing:4px;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+h1 {
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(38px,6vw,70px);
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+h1 span {
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p {
+    color:var(--muted);
+    line-height:1.8;
+    max-width:510px;
+    font-size:14px;
+}
+
+.primary-btn {
+    display:inline-block;
+    margin-top:28px;
+    padding:14px 25px;
+    border-radius:10px;
+    background:linear-gradient(100deg,#007dff,#8646ff);
+    color:white;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:800;
+    box-shadow:0 0 25px #536bff55;
+    transition:.3s;
+}
+
+.primary-btn:hover {
+    transform:translateY(-4px);
+    box-shadow:0 0 35px #536bff99;
+}
+
+/* SECTIONS */
+
+section {
+    width:92%;
+    max-width:1200px;
+    margin:0 auto 85px;
+}
+
+.heading { margin-bottom:28px; }
+
+.heading h2 {
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(21px,3vw,30px);
+}
+
+.heading p {
+    color:var(--muted);
+    font-size:12px;
+    margin-top:9px;
+}
+
+/* OVERLAY SHOWCASE */
+
+.showcase {
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:20px;
+}
+
+.canvas {
+    min-height:350px;
+    position:relative;
+    overflow:hidden;
+    border-radius:22px;
+    border:1px solid #39396b;
+    background:
+        linear-gradient(135deg,#101d3d,#21113d);
+}
+
+.canvas img {
+    width:100%;
+    height:100%;
+    position:absolute;
+    inset:0;
+    object-fit:cover;
+}
+
+.canvas::after {
+    content:"";
+    position:absolute;
+    inset:40% 0 0;
+    background:linear-gradient(transparent,#080817e8);
+}
+
+.canvas-label {
+    position:absolute;
+    bottom:25px;
+    left:25px;
+    z-index:2;
+}
+
+.canvas-label small {
+    color:var(--blue);
+    letter-spacing:3px;
+    font-weight:800;
+}
+
+.canvas-label h3 {
+    font-family:Orbitron,sans-serif;
+    font-size:23px;
+    margin-top:10px;
+}
+
+.showcase-side {
+    display:grid;
+    grid-template-rows:1fr 1fr;
+    gap:16px;
+}
+
+.layer-card {
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #35355d;
+    background:linear-gradient(120deg,#101b37,#211138);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    transition:.3s;
+}
+
+.layer-card:hover {
+    border-color:var(--purple);
+    box-shadow:0 0 22px #9b5cff25;
+}
+
+.layer-card h3 {
+    font-family:Orbitron,sans-serif;
+    font-size:17px;
+}
+
+.layer-card p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.7;
+    margin-top:10px;
+}
+
+/* CATEGORIES */
+
+.categories {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.category {
+    min-height:135px;
+    padding:20px;
+    border:1px solid #303052;
+    border-radius:16px;
+    background:#111120;
+    transition:.3s;
+}
+
+.category:hover {
+    transform:translateY(-5px);
+    border-color:var(--blue);
+    box-shadow:0 0 20px #007dff25;
+}
+
+.category .symbol {
+    font-size:25px;
+    color:var(--blue);
+    margin-bottom:15px;
+}
+
+.category h3 { font-size:14px; }
+
+.category p {
+    color:var(--muted);
+    font-size:11px;
+    margin-top:7px;
+}
+
+/* PRODUCT COLLECTION */
+
+.products {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;
+}
+
+.product {
+    background:var(--panel);
+    border:1px solid #292944;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.product:hover {
+    transform:translateY(-6px);
+    border-color:var(--purple);
+    box-shadow:0 0 24px #9b5cff20;
+}
+
+.product-image {
+    height:190px;
+    background:linear-gradient(135deg,#10254b,#261344);
+}
+
+.product-image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product-info { padding:19px; }
+
+.product-info h3 {
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.product-info p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
+}
+
+.product-btn {
+    display:inline-block;
+    margin-top:16px;
+    padding:10px 16px;
+    background:#171b35;
+    border:1px solid #4545a0;
+    border-radius:8px;
+    color:var(--blue);
+    text-decoration:none;
+    font-size:11px;
+    font-weight:700;
+}
+
+/* FOOTER */
+
+footer {
+    border-top:1px solid #24243d;
+    padding:35px 5%;
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+}
+
+footer strong {
+    color:var(--blue);
+    font-family:Orbitron,sans-serif;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px) {
+    nav { flex-direction:column; align-items:flex-start; }
+    .nav-links { justify-content:flex-start; gap:13px; }
+    .hero { padding:40px 25px; }
+    .showcase { grid-template-columns:1fr; }
+    .categories { grid-template-columns:repeat(2,1fr); }
+    .products { grid-template-columns:repeat(2,1fr); }
+}
+
+@media(max-width:550px) {
+    .products { grid-template-columns:1fr; }
+    .hero { min-height:350px; }
+    .categories { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">VANTA<span>SYNC</span></div>
+
+    <div class="nav-links">
+        <a href="vanta-sync.html">Home</a>
+        <a href="audio.html">Audio</a>
+        <a href="twixtors.html">Twixtors</a>
+        <a href="clips.html">Clips</a>
+        <a href="overlays.html" class="active">Overlays</a>
+        <a href="effects.html">Effects</a>
+        <a href="transitions.html">Transitions</a>
+        <a href="anime-packs.html">Anime</a>
+        <a href="free-downloads.html">Free</a>
+        <a href="premium-packs.html">Premium</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">VANTA SYNC / CREATIVE STUDIO</div>
+
+        <h1>BUILD YOUR <span>LAYERS.</span></h1>
+
+        <p>
+            Give your edits another dimension.
+            Discover visual overlays, textures, lighting
+            elements and creative resources.
+        </p>
+
+        <a href="#collection" class="primary-btn">
+            EXPLORE OVERLAYS ↗
+        </a>
+    </div>
+</header>
+
+<section>
+    <div class="heading">
+        <h2>THE OVERLAY STUDIO</h2>
+        <p>Visual elements that transform your editing projects.</p>
+    </div>
+
+    <div class="showcase">
+
+        <div class="canvas">
+            <img src="images/overlay-showcase.jpg"
+                 alt="Overlay showcase"
+                 onerror="this.style.display='none'">
+
+            <div class="canvas-label">
+                <small>CREATIVE COLLECTION</small>
+                <h3>VISUAL DIMENSIONS</h3>
+            </div>
+        </div>
+
+        <div class="showcase-side">
+
+            <div class="layer-card">
+                <h3>LIGHT & GLOW</h3>
+                <p>Lighting effects, glow elements and visual highlights.</p>
+            </div>
+
+            <div class="layer-card">
+                <h3>TEXTURES & GRAINS</h3>
+                <p>Add depth, atmosphere and texture to your projects.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="heading">
+        <h2>EXPLORE CATEGORIES</h2>
+        <p>Find the visual elements you need.</p>
+    </div>
+
+    <div class="categories">
+
+        <div class="category">
+            <div class="symbol">✧</div>
+            <h3>Light Leaks</h3>
+            <p>Lighting and flare elements.</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">◈</div>
+            <h3>Particles</h3>
+            <p>Dust, sparks and floating details.</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">◇</div>
+            <h3>Textures</h3>
+            <p>Grain and creative surfaces.</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">✦</div>
+            <h3>Glows</h3>
+            <p>Neon and lighting overlays.</p>
+        </div>
+
+    </div>
+</section>
+
+<section id="collection">
+    <div class="heading">
+        <h2>THE OVERLAY COLLECTION</h2>
+        <p>Discover the available creative packs.</p>
+    </div>
+
+    <div class="products">
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/overlay-1.jpg"
+                     alt="Light leaks pack"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Light Leaks Pack</h3>
+                <p>Lighting elements for cinematic edits.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/overlay-2.jpg"
+                     alt="Particles pack"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Particle Collection</h3>
+                <p>Atmospheric particles and visual details.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/overlay-3.jpg"
+                     alt="Neon overlays"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Neon Overlays</h3>
+                <p>Bright glowing visual elements.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/overlay-4.jpg"
+                     alt="Texture pack"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Texture Pack</h3>
+                <p>Grain, surfaces and creative textures.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/overlay-5.jpg"
+                     alt="Cinematic overlays"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Cinematic Overlays</h3>
+                <p>Visual layers for cinematic projects.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/overlay-6.jpg"
+                     alt="Ultimate overlays"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>Ultimate Overlay Pack</h3>
+                <p>A collection of creative editing elements.</p>
+                <a href="#" class="product-btn">VIEW PACK ↗</a>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<footer>
+    <strong>VANTA SYNC</strong>
+    <p style="margin-top:10px">Create beyond limits.</p>
+    <p style="margin-top:12px">© 2026 Vanta Sync. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transitions | Vanta Sync</title>
+
+<style>
+:root {
+    --blue: #00c8ff;
+    --purple: #9b5cff;
+    --bg: #050610;
+    --panel: #0c1020;
+    --muted: #9ba8c4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 6%;
+    background: rgba(5, 6, 16, .94);
+    border-bottom: 1px solid rgba(0,200,255,.2);
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.logo span { color: var(--blue); }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: #aab4ca;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--blue);
+    text-shadow: 0 0 12px var(--blue);
+}
+
+.hero {
+    min-height: 560px;
+    padding: 100px 8%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, #050610 5%, rgba(5,6,16,.88) 48%, rgba(5,6,16,.35)),
+        url("images/transitions-banner.jpg") center/cover,
+        radial-gradient(circle at 80% 40%, #28205c, #050610 65%);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    right: 8%;
+    top: 15%;
+    border: 1px solid rgba(0,200,255,.25);
+    border-radius: 50%;
+    box-shadow: 0 0 90px rgba(0,200,255,.12);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+}
+
+.eyebrow {
+    color: var(--blue);
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 8vw, 90px);
+    line-height: .98;
+    font-weight: 900;
+    letter-spacing: -4px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #b1bad0;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 25px 0 32px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 25px;
+    border-radius: 5px;
+    background: linear-gradient(100deg, #00bfff, #8155ff);
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 0 25px rgba(0,160,255,.25);
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px rgba(0,160,255,.5);
+}
+
+section { padding: 85px 7%; }
+
+.section-heading {
+    margin-bottom: 35px;
+}
+
+.section-heading small {
+    color: var(--blue);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.section-heading h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-top: 12px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.preview-section {
+    background: linear-gradient(180deg, #080b19, #070914);
+}
+
+.preview-strip {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 16px;
+}
+
+.preview {
+    min-height: 220px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,200,255,.2);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #102b48, #17112e 65%, #080b19);
+}
+
+.preview:nth-child(2) {
+    background: linear-gradient(135deg, #321b54, #101d3a);
+}
+
+.preview:nth-child(3) {
+    background: linear-gradient(135deg, #123b4c, #251448);
+}
+
+.preview img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-label {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.preview-label h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.preview-label p {
+    font-size: 12px;
+    color: #c2cce0;
+}
+
+.preview::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 35%, rgba(0,0,0,.85));
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
+
+.category {
+    padding: 25px 15px;
+    background: var(--panel);
+    border: 1px solid rgba(155,92,255,.2);
+    border-radius: 9px;
+    text-align: center;
+    transition: .3s;
+}
+
+.category:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue);
+    box-shadow: 0 0 24px rgba(0,200,255,.12);
+}
+
+.category .symbol {
+    font-size: 27px;
+    margin-bottom: 13px;
+}
+
+.category h3 { font-size: 14px; }
+
+.category p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+.products-section {
+    background:
+        radial-gradient(circle at 5% 50%, rgba(0,150,255,.08), transparent 35%),
+        #070914;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.product {
+    background: #0d1121;
+    border: 1px solid rgba(155,92,255,.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-7px);
+    border-color: var(--blue);
+    box-shadow: 0 12px 35px rgba(0,150,255,.12);
+}
+
+.product-image {
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #102d4d, #342052, #080b19);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info { padding: 22px; }
+
+.product-info small {
+    color: var(--blue);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.product-info h3 {
+    margin: 10px 0;
+    font-size: 19px;
+}
+
+.product-info p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 42px;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.product-bottom span {
+    color: #c3cce0;
+    font-size: 12px;
+}
+
+.product-bottom a {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: bold;
+}
+
+.product-bottom a:hover { color: var(--purple); }
+
+.cta {
+    margin: 30px 7% 90px;
+    padding: 65px 30px;
+    text-align: center;
+    border: 1px solid rgba(0,200,255,.3);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(0,200,255,.14), transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(155,92,255,.16), transparent 40%),
+        #0c1020;
+}
+
+.cta h2 {
+    font-size: clamp(27px, 4vw, 42px);
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: var(--muted);
+    margin: 0 auto 25px;
+    max-width: 550px;
+    line-height: 1.7;
+}
+
+footer {
+    padding: 35px 7%;
+    border-top: 1px solid rgba(0,200,255,.15);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: #7e8aa5;
+    font-size: 12px;
+}
+
+footer strong { color: white; }
+
+@media(max-width: 900px) {
+    .category-grid { grid-template-columns: repeat(3, 1fr); }
+    .nav-links { gap: 11px; }
+    .nav-links a { font-size: 11px; }
+}
+
+@media(max-width: 650px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero {
+        min-height: 490px;
+        padding: 75px 7%;
+    }
+
+    .hero h1 { letter-spacing: -2px; }
+
+    section { padding: 65px 6%; }
+
+    .preview-strip,
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .preview { min-height: 190px; }
+
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta { margin: 20px 6% 65px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="vanta-sync.html" class="logo">VANTA<span>SYNC</span></a>
+
+    <div class="nav-links">
+        <a href="vanta-sync.html">Home</a>
+        <a href="audio.html">Audio</a>
+        <a href="twixtors.html">Twixtors</a>
+        <a href="clips.html">Clips</a>
+        <a href="overlays.html">Overlays</a>
+        <a href="effects.html">Effects</a>
+        <a href="transitions.html" class="active">Transitions</a>
+        <a href="anime-packs.html">Anime Packs</a>
+        <a href="free-downloads.html">Free Downloads</a>
+        <a href="premium-packs.html">Premium Packs</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">VANTA SYNC / TRANSITION LIBRARY</div>
+        <h1>MAKE EVERY<br><span>FRAME MOVE.</span></h1>
+        <p>
+            Give your edits a cleaner flow. Explore transition
+            resources designed for smooth movement, sharp cuts
+            and cinematic editing.
+        </p>
+        <a href="#products" class="btn">EXPLORE TRANSITIONS ↗</a>
+    </div>
+</header>
+
+<section class="preview-section">
+    <div class="section-heading">
+        <small>THE TRANSITION EXPERIENCE</small>
+        <h2>Control the movement.</h2>
+        <p>
+            Different styles for different edits. Choose the
+            movement that fits your next project.
+        </p>
+    </div>
+
+    <div class="preview-strip">
+        <div class="preview">
+            <img src="images/transition-showcase.jpg"
+                 alt=""
+                 onerror="this.style.display='none'">
+            <div class="preview-label">
+                <h3>Cinematic Flow</h3>
+                <p>For smooth visual sequences</p>
+            </div>
+        </div>
+
+        <div class="preview">
+            <div class="preview-label">
+                <h3>Fast Motion</h3>
+                <p>For energetic edits</p>
+            </div>
+        </div>
+
+        <div class="preview">
+            <div class="preview-label">
+                <h3>Digital Glitch</h3>
+                <p>For futuristic visuals</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="section-heading">
+        <small>FIND YOUR STYLE</small>
+        <h2>Transition categories.</h2>
+        <p>Browse different transition styles and find the right look.</p>
+    </div>
+
+    <div class="category-grid">
+        <div class="category">
+            <div class="symbol">↗</div>
+            <h3>Zoom</h3>
+            <p>Fast camera movement</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">〰</div>
+            <h3>Shake</h3>
+            <p>Impact and movement</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">◉</div>
+            <h3>Blur</h3>
+            <p>Smooth visual changes</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">▦</div>
+            <h3>Glitch</h3>
+            <p>Digital distortion style</p>
+        </div>
+
+        <div class="category">
+            <div class="symbol">✦</div>
+            <h3>Smooth</h3>
+            <p>Clean scene changes</p>
+        </div>
+    </div>
+</section>
+
+<section class="products-section" id="products">
+    <div class="section-heading">
+        <small>THE VANTA COLLECTION</small>
+        <h2>Transition packs.</h2>
+        <p>
+            A collection of editing resources for different
+            styles and creative projects.
+        </p>
+    </div>
+
+    <div class="product-grid">
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/transition-1.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <small>PACK 01 / CINEMATIC</small>
+                <h3>Cinematic Transitions</h3>
+                <p>Clean movement styles for cinematic edits.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/transition-2.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <small>PACK 02 / MOTION</small>
+                <h3>Velocity Transitions</h3>
+                <p>Fast movement styles for energetic edits.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/transition-3.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <small>PACK 03 / DIGITAL</small>
+                <h3>Glitch Transitions</h3>
+                <p>Digital-inspired movement and distortion.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/transition-4.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <small>PACK 04 / IMPACT</small>
+                <h3>Impact Transitions</h3>
+                <p>Bold movement styles for strong visual moments.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/transition-5.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <small>PACK 05 / SMOOTH</small>
+                <h3>Flow Transitions</h3>
+                <p>Smooth transitions for clean editing sequences.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/transition-6.jpg" alt=""
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <small>PACK 06 / CREATIVE</small>
+                <h3>Ultimate Transition Pack</h3>
+                <p>A mixed collection for different editing styles.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<div class="cta">
+    <h2>YOUR NEXT EDIT STARTS HERE.</h2>
+    <p>
+        Explore the Vanta Sync library and find resources
+        that help bring your creative ideas together.
+    </p>
+    <a href="vanta-sync.html" class="btn">BACK TO HOME ↗</a>
+</div>
+
+<footer>
+    <div><strong>VANTA SYNC</strong> — Create without limits.</div>
+    <div>Transitions / Editing Resources / Creative Tools</div>
+    <div>© 2026 Vanta Sync</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,693 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Packs | Vanta Sync</title>
+
+<style>
+:root {
+    --blue: #00c8ff;
+    --purple: #9b5cff;
+    --bg: #050610;
+    --panel: #0d1121;
+    --muted: #9ba8c4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 6%;
+    background: rgba(5,6,16,.95);
+    border-bottom: 1px solid rgba(0,200,255,.2);
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.logo span { color: var(--blue); }
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 17px;
+}
+
+.nav-links a {
+    color: #aab4ca;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--blue);
+    text-shadow: 0 0 12px var(--blue);
+}
+
+.hero {
+    min-height: 590px;
+    padding: 100px 8%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, #050610 5%, rgba(5,6,16,.85) 55%, rgba(5,6,16,.2)),
+        url("images/premium-banner.jpg") center/cover,
+        radial-gradient(circle at 80% 40%, #38205f, #050610 65%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 690px;
+}
+
+.eyebrow {
+    color: var(--blue);
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 8vw, 92px);
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #b1bad0;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 25px 0 32px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 25px;
+    border-radius: 5px;
+    background: linear-gradient(100deg, #00bfff, #8155ff);
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 0 25px rgba(0,160,255,.25);
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px rgba(0,160,255,.5);
+}
+
+section { padding: 85px 7%; }
+
+.heading { margin-bottom: 35px; }
+
+.heading small {
+    color: var(--blue);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.heading h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-top: 12px;
+}
+
+.heading p {
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.featured {
+    background: #080b19;
+}
+
+.feature-layout {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 25px;
+}
+
+.feature-image {
+    min-height: 390px;
+    border-radius: 13px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #102d4d, #342052, #080b19);
+    border: 1px solid rgba(0,200,255,.25);
+}
+
+.feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+}
+
+.feature-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 35%, rgba(0,0,0,.85));
+}
+
+.feature-caption {
+    position: absolute;
+    z-index: 2;
+    bottom: 25px;
+    left: 25px;
+}
+
+.feature-caption small {
+    color: var(--blue);
+    letter-spacing: 2px;
+}
+
+.feature-caption h3 {
+    font-size: 30px;
+    margin-top: 9px;
+}
+
+.feature-details {
+    padding: 35px;
+    background: var(--panel);
+    border: 1px solid rgba(155,92,255,.25);
+    border-radius: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-details h3 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.feature-details p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.feature-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.feature-list li {
+    padding: 12px 0;
+    color: #c2cce0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.feature-list li::before {
+    content: "✦";
+    color: var(--blue);
+    margin-right: 10px;
+}
+
+.products-section {
+    background:
+        radial-gradient(circle at 90% 30%, rgba(155,92,255,.09), transparent 35%),
+        #070914;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.product {
+    background: #0d1121;
+    border: 1px solid rgba(155,92,255,.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-7px);
+    border-color: var(--blue);
+    box-shadow: 0 12px 35px rgba(0,150,255,.12);
+}
+
+.product-image {
+    height: 210px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #102d4d, #342052, #080b19);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 7px 12px;
+    background: rgba(5,6,16,.85);
+    border: 1px solid var(--purple);
+    color: #c8aaff;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.product-info { padding: 22px; }
+
+.product-info small {
+    color: var(--blue);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.product-info h3 {
+    margin: 11px 0;
+    font-size: 19px;
+}
+
+.product-info p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 42px;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.product-bottom span {
+    color: #c3cce0;
+    font-size: 12px;
+}
+
+.product-bottom a {
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.product-bottom a:hover { color: var(--purple); }
+
+.vip {
+    margin: 0 7% 85px;
+    padding: 65px 35px;
+    text-align: center;
+    border: 1px solid rgba(155,92,255,.4);
+    border-radius: 15px;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(0,200,255,.15), transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(155,92,255,.2), transparent 40%),
+        #0c1020;
+    box-shadow: 0 0 45px rgba(100,70,255,.08);
+}
+
+.vip small {
+    color: var(--purple);
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.vip h2 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin: 15px 0;
+}
+
+.vip p {
+    max-width: 580px;
+    margin: 0 auto 25px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.vip-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.secondary-btn {
+    display: inline-block;
+    padding: 14px 25px;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.secondary-btn:hover {
+    background: rgba(0,200,255,.1);
+    box-shadow: 0 0 20px rgba(0,200,255,.15);
+}
+
+.notice {
+    margin: 0 7% 85px;
+    padding: 28px;
+    border-left: 3px solid var(--purple);
+    background: #0c1020;
+    border-radius: 5px;
+}
+
+.notice h3 { margin-bottom: 10px; }
+
+.notice p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+footer {
+    padding: 35px 7%;
+    border-top: 1px solid rgba(0,200,255,.15);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: #7e8aa5;
+    font-size: 12px;
+}
+
+footer strong { color: white; }
+
+@media(max-width: 900px) {
+    .nav-links { gap: 11px; }
+    .nav-links a { font-size: 11px; }
+}
+
+@media(max-width: 650px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero {
+        min-height: 480px;
+        padding: 75px 7%;
+    }
+
+    .hero h1 { letter-spacing: -2px; }
+
+    section { padding: 65px 6%; }
+
+    .feature-layout,
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-image { min-height: 280px; }
+
+    .feature-details { padding: 25px; }
+
+    .vip,
+    .notice {
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="vanta-sync.html" class="logo">VANTA<span>SYNC</span></a>
+
+    <div class="nav-links">
+        <a href="vanta-sync.html">Home</a>
+        <a href="audio.html">Audio</a>
+        <a href="twixtors.html">Twixtors</a>
+        <a href="clips.html">Clips</a>
+        <a href="overlays.html">Overlays</a>
+        <a href="effects.html">Effects</a>
+        <a href="transitions.html">Transitions</a>
+        <a href="anime-packs.html">Anime Packs</a>
+        <a href="free-downloads.html">Free Downloads</a>
+        <a href="premium-packs.html" class="active">Premium Packs</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">VANTA SYNC / PREMIUM COLLECTION</div>
+        <h1>LEVEL UP<br><span>YOUR EDITS.</span></h1>
+        <p>
+            Discover curated editing collections and premium
+            resources designed for creators who want more
+            creative possibilities.
+        </p>
+        <a href="#products" class="btn">EXPLORE PREMIUM ↗</a>
+    </div>
+</header>
+
+<section class="featured">
+    <div class="heading">
+        <small>THE SIGNATURE COLLECTION</small>
+        <h2>More than just resources.</h2>
+        <p>
+            A curated collection of editing assets and creative
+            bundles for different types of projects.
+        </p>
+    </div>
+
+    <div class="feature-layout">
+        <div class="feature-image">
+            <img src="images/premium-showcase.jpg" alt=""
+                 onerror="this.style.display='none'">
+            <div class="feature-caption">
+                <small>VANTA SIGNATURE</small>
+                <h3>The Ultimate Creator Bundle</h3>
+            </div>
+        </div>
+
+        <div class="feature-details">
+            <h3>Everything in one place.</h3>
+            <p>
+                Explore planned collections of editing resources
+                designed to work across different creative styles.
+            </p>
+
+            <ul class="feature-list">
+                <li>Curated editing resources</li>
+                <li>Visual effects and overlays</li>
+                <li>Audio and transition collections</li>
+                <li>Creative bundles for editors</li>
+            </ul>
+
+            <a href="#products" class="btn">VIEW THE COLLECTION ↗</a>
+        </div>
+    </div>
+</section>
+
+<section class="products-section" id="products">
+    <div class="heading">
+        <small>PREMIUM RESOURCE LIBRARY</small>
+        <h2>Choose your collection.</h2>
+        <p>
+            Browse the planned premium packs and find the
+            collection that matches your editing style.
+        </p>
+    </div>
+
+    <div class="product-grid">
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/premium-pack-1.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span class="product-tag">SIGNATURE</span>
+            </div>
+            <div class="product-info">
+                <small>PACK 01 / COMPLETE</small>
+                <h3>Ultimate Creator Bundle</h3>
+                <p>A mixed collection of resources for creative projects.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/premium-pack-2.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span class="product-tag">VISUALS</span>
+            </div>
+            <div class="product-info">
+                <small>PACK 02 / VISUAL FX</small>
+                <h3>Visual Effects Bundle</h3>
+                <p>A curated selection of visual editing resources.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/premium-pack-3.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span class="product-tag">AUDIO</span>
+            </div>
+            <div class="product-info">
+                <small>PACK 03 / SOUND</small>
+                <h3>Audio Master Collection</h3>
+                <p>Audio resources for different editing styles.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/premium-pack-4.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span class="product-tag">MOTION</span>
+            </div>
+            <div class="product-info">
+                <small>PACK 04 / TRANSITIONS</small>
+                <h3>Motion Editor Bundle</h3>
+                <p>Movement resources for dynamic editing sequences.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/premium-pack-5.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span class="product-tag">ANIME</span>
+            </div>
+            <div class="product-info">
+                <small>PACK 05 / ANIME</small>
+                <h3>Anime Editor Bundle</h3>
+                <p>A collection of resources for anime-style edits.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="product">
+            <div class="product-image">
+                <img src="images/premium-pack-6.jpg" alt=""
+                     onerror="this.style.display='none'">
+                <span class="product-tag">PRO</span>
+            </div>
+            <div class="product-info">
+                <small>PACK 06 / COMPLETE</small>
+                <h3>Vanta Pro Collection</h3>
+                <p>A larger collection of premium editing resources.</p>
+                <div class="product-bottom">
+                    <span>Price: TBA</span>
+                    <a href="#">VIEW PACK ↗</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<div class="vip">
+    <small>THE VANTA EXPERIENCE</small>
+    <h2>WELCOME TO THE NEXT LEVEL.</h2>
+    <p>
+        Discover the complete Vanta Sync collection.
+        Explore free resources, premium packs and creative
+        tools built around your editing workflow.
+    </p>
+
+    <div class="vip-links">
+        <a href="free-downloads.html" class="secondary-btn">
+            FREE COLLECTION
+        </a>
+
+        <a href="vanta-sync.html" class="btn">
+            BACK TO HOME ↗
+        </a>
+    </div>
+</div>
+
+<div class="notice">
+    <h3>Premium collection information</h3>
+    <p>
+        Product cards and prices are currently placeholders.
+        Actual packs, previews, checkout and secure file delivery
+        will be connected when the resources are ready.
+        Only use assets that you own or have permission to distribute.
+    </p>
+</div>
+
+<footer>
+    <div><strong>VANTA SYNC</strong> — Create without limits.</div>
+    <div>Premium Packs / Editing Resources / Creative Tools</div>
+    <div>© 2026 Vanta Sync</div>
+</footer>
+
+</body>
+</html>
