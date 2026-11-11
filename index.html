@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +67,7 @@ body::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5,5,11,.78);
+    background: rgba(5,5,11,.88);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(255,255,255,.07);
     z-index: 100;
@@ -89,12 +88,12 @@ body::before {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 22px;
 }
 
 .nav-links a {
     color: #aaaabd;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     transition: .3s;
 }
@@ -105,16 +104,15 @@ body::before {
 }
 
 .nav-button {
-    padding: 12px 21px;
+    padding: 12px 18px;
     border-radius: 6px;
     background: linear-gradient(110deg,var(--blue),var(--purple));
     color: white !important;
-    box-shadow: 0 0 25px rgba(90,100,255,.25);
 }
 
 .menu-toggle {
     display: none;
-    font-size: 25px;
+    font-size: 27px;
     color: white;
     background: none;
     border: none;
@@ -131,7 +129,7 @@ body::before {
     position: relative;
     overflow: hidden;
     background:
-        linear-gradient(90deg,rgba(5,5,11,.98) 0%,rgba(5,5,11,.83) 48%,rgba(5,5,11,.35) 100%),
+        linear-gradient(90deg,rgba(5,5,11,.98),rgba(5,5,11,.78) 55%,rgba(5,5,11,.35)),
         linear-gradient(0deg,var(--bg),transparent 35%),
         url("images/home-hero.jpg") center/cover;
 }
@@ -151,7 +149,7 @@ body::before {
 .hero-content {
     max-width: 750px;
     position: relative;
-    z-index: 2;
+    z-index: 5;
 }
 
 .eyebrow {
@@ -162,7 +160,6 @@ body::before {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 4px;
-    text-transform: uppercase;
     margin-bottom: 28px;
 }
 
@@ -245,7 +242,7 @@ body::before {
     letter-spacing: 2px;
 }
 
-/* FLOATING PREVIEWS */
+/* FLOATING PREVIEW CARDS */
 
 .floating-card {
     position: absolute;
@@ -312,10 +309,7 @@ body::before {
     font-weight: 400;
 }
 
-.float-two .preview-image {
-    height: 65%;
-}
-
+.float-two .preview-image,
 .float-three .preview-image {
     height: 65%;
 }
@@ -816,7 +810,7 @@ footer {
     transform: translateY(0);
 }
 
-/* RESPONSIVE */
+/* TABLET */
 
 @media(max-width:1000px) {
     .nav-links {
@@ -840,10 +834,17 @@ footer {
     }
 }
 
+/* MOBILE */
+
 @media(max-width:760px) {
     .navbar {
         height: 72px;
         padding: 0 6%;
+    }
+
+    .logo {
+        font-size: 20px;
+        letter-spacing: 2px;
     }
 
     .menu-toggle {
@@ -872,42 +873,95 @@ footer {
         font-size: 13px;
     }
 
+    /* Hero content and cards now stack vertically */
     .hero {
-        min-height: 800px;
-        padding: 140px 7% 80px;
-        align-items: flex-start;
-        background-position: 60% center;
-    }
-
-    .hero h1 {
-        letter-spacing: -3px;
+        min-height: auto;
+        height: auto;
+        padding: 120px 6% 65px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background-position: center top;
     }
 
     .hero-content {
+        width: 100%;
         max-width: 100%;
+        flex: 0 0 auto;
     }
 
-    .floating-card {
-        opacity: .8;
+    .eyebrow {
+        font-size: 9px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
     }
 
-    .float-one {
-        width: 145px;
-        height: 190px;
-        right: 8%;
-        top: auto;
-        bottom: 10%;
+    .hero h1 {
+        font-size: clamp(39px,10.5vw,62px);
+        line-height: 1.08;
+        letter-spacing: -2px;
+        margin-bottom: 22px;
     }
 
-    .float-two {
-        width: 125px;
-        height: 155px;
-        right: 48%;
-        bottom: 8%;
+    .hero-description {
+        max-width: 100%;
+        font-size: 14px;
+        line-height: 1.75;
+        margin-bottom: 26px;
     }
 
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        min-height: 54px;
+        padding: 15px 16px;
+        text-align: center;
+    }
+
+    .hero-note {
+        margin-top: 25px;
+        margin-bottom: 28px;
+        font-size: 9px;
+        line-height: 1.7;
+        letter-spacing: 1.5px;
+    }
+
+    .floating-card,
+    .float-one,
+    .float-two,
     .float-three {
-        display: none;
+        position: relative;
+        inset: auto;
+        display: block;
+        width: 100%;
+        max-width: 360px;
+        height: 155px;
+        margin: 14px auto 0;
+        opacity: 1;
+        transform: none;
+        animation: none;
+        border-radius: 12px;
+    }
+
+    .preview-image {
+        height: 95px;
+    }
+
+    .preview-label {
+        padding: 12px 16px;
+        font-size: 11px;
+    }
+
+    .preview-label small {
+        font-size: 10px;
     }
 
     section {
@@ -924,6 +978,7 @@ footer {
 
     .feature-layout {
         grid-template-columns: 1fr;
+        gap: 35px;
     }
 
     .feature-art {
@@ -950,9 +1005,33 @@ footer {
     .final-cta {
         padding: 90px 7%;
     }
+
+    .footer-bottom {
+        flex-direction: column;
+    }
 }
 
+/* SMALL PHONES */
+
 @media(max-width:450px) {
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .logo {
+        font-size: clamp(16px,5vw,21px);
+    }
+
+    .hero {
+        padding-top: 112px;
+        padding-bottom: 55px;
+    }
+
+    .hero h1 {
+        font-size: clamp(36px,10vw,48px);
+        letter-spacing: -1.8px;
+    }
+
     .category-grid {
         grid-template-columns: 1fr;
     }
@@ -961,21 +1040,13 @@ footer {
         min-height: 220px;
     }
 
-    .hero {
-        min-height: 850px;
+    .floating-card {
+        max-width: 100%;
+        height: 145px;
     }
 
-    .hero-description {
-        font-size: 13px;
-    }
-
-    .hero-actions {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .btn {
-        width: 100%;
+    .premium-panel {
+        padding: 35px 22px;
     }
 
     .footer-bottom {
@@ -987,15 +1058,13 @@ footer {
 
 <body>
 
-<!-- NAVIGATION -->
-
 <header class="navbar">
-    <a href="vanta-sync.html" class="logo">VANTA<span>.</span>SYNC</a>
+    <a href="index.html" class="logo">VANTA<span>.</span>SYNC</a>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
 
     <nav class="nav-links" id="navLinks">
-        <a href="vanta-sync.html">HOME</a>
+        <a href="index.html">HOME</a>
         <a href="audio.html">AUDIO</a>
         <a href="twixtors.html">TWIXTORS</a>
         <a href="clips.html">CLIPS</a>
@@ -1008,11 +1077,14 @@ footer {
     </nav>
 </header>
 
+<main>
+
 <!-- HERO -->
 
-<main>
 <section class="hero">
+
     <div class="hero-content">
+
         <div class="eyebrow">WELCOME TO THE CREATIVE UNIVERSE</div>
 
         <h1>
@@ -1032,6 +1104,7 @@ footer {
         </div>
 
         <div class="hero-note">CREATE WITHOUT LIMITS. EDIT WITHOUT RULES.</div>
+
     </div>
 
     <div class="floating-card float-one">
@@ -1060,9 +1133,10 @@ footer {
         </div>
         <div class="preview-label">NEXT LEVEL VISUALS</div>
     </div>
+
 </section>
 
-<!-- MARQUEE -->
+<!-- MOVING STRIP -->
 
 <div class="marquee">
     <div class="marquee-track">
@@ -1074,11 +1148,13 @@ footer {
 <!-- CATEGORIES -->
 
 <section class="categories" id="categories">
+
     <div class="section-top reveal">
         <div>
             <div class="section-kicker">01 / EXPLORE</div>
             <h2 class="section-title">THE CREATOR'S<br><span>PLAYGROUND.</span></h2>
         </div>
+
         <p class="section-description">
             From sound design to cinematic visuals, discover the resources
             that bring your creative ideas to life.
@@ -1154,18 +1230,23 @@ footer {
     </div>
 </section>
 
-<!-- FEATURED -->
+<!-- FEATURED COLLECTION -->
 
 <section class="featured">
+
     <div class="feature-layout">
+
         <div class="feature-art reveal">
             <img src="images/home-featured.jpg" alt="Vanta Sync featured collection" onerror="this.style.display='none'">
             <div class="art-tag">VANTA SYNC / FEATURED COLLECTION</div>
         </div>
 
         <div class="feature-copy reveal">
+
             <div class="section-kicker">02 / THE EXPERIENCE</div>
+
             <h2>MORE THAN<br>JUST <span>RESOURCES.</span></h2>
+
             <p>
                 Your creativity deserves more than ordinary tools.
                 Discover collections designed to give your projects
@@ -1181,62 +1262,84 @@ footer {
             </ul>
 
             <a href="clips.html" class="btn btn-primary">DISCOVER COLLECTIONS ↗</a>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- STATS -->
 
 <div class="stats">
+
     <div class="stat reveal">
         <h3>08+</h3>
         <p>RESOURCE CATEGORIES</p>
     </div>
+
     <div class="stat reveal">
         <h3>01</h3>
         <p>CREATIVE UNIVERSE</p>
     </div>
+
     <div class="stat reveal">
         <h3>∞</h3>
         <p>CREATIVE POSSIBILITIES</p>
     </div>
+
     <div class="stat reveal">
         <h3>24/7</h3>
         <p>INSPIRATION MODE</p>
     </div>
+
 </div>
 
 <!-- PREMIUM -->
 
 <section class="premium">
+
     <div class="premium-panel reveal">
+
         <div class="premium-content">
+
             <div class="section-kicker">03 / THE NEXT LEVEL</div>
+
             <h2>ENTER THE<br><span>PREMIUM ERA.</span></h2>
+
             <p>
                 Explore curated editing collections and creative bundles
                 built to give your projects a fresh direction.
             </p>
+
             <a href="premium-packs.html" class="btn btn-primary">EXPLORE PREMIUM ↗</a>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- FREE RESOURCES -->
 
 <section class="free-section">
+
     <div class="section-top reveal">
+
         <div>
             <div class="section-kicker">04 / START HERE</div>
             <h2 class="section-title">CREATE MORE.<br><span>SPEND ZERO.</span></h2>
         </div>
+
         <p class="section-description">
             Start exploring with free creative resources.
             Build your workflow and experiment with new styles.
         </p>
+
     </div>
 
     <div class="free-grid">
+
         <div class="free-card reveal">
             <div class="symbol">♫</div>
             <h3>SOUND STARTER</h3>
@@ -1257,19 +1360,26 @@ footer {
             <p>Find free resources to experiment and get started.</p>
             <a href="free-downloads.html" class="text-link">GET FREE RESOURCES ↗</a>
         </div>
+
     </div>
+
 </section>
 
 <!-- FINAL CTA -->
 
 <section class="final-cta">
+
     <div class="section-kicker reveal">05 / YOUR NEXT MOVE</div>
+
     <h2 class="reveal">READY TO MAKE<br><span>IT DIFFERENT?</span></h2>
+
     <p class="reveal">
         Your next creative project starts here.
         Explore the Vanta Sync universe and find your next inspiration.
     </p>
+
     <a href="free-downloads.html" class="btn btn-primary reveal">START EXPLORING ↗</a>
+
 </section>
 
 </main>
@@ -1277,9 +1387,12 @@ footer {
 <!-- FOOTER -->
 
 <footer>
+
     <div class="footer-top">
+
         <div class="footer-brand">
-            <a href="vanta-sync.html" class="logo">VANTA<span>.</span>SYNC</a>
+            <a href="index.html" class="logo">VANTA<span>.</span>SYNC</a>
+
             <p>
                 A creative universe for editors, designers and creators.
                 Explore resources, experiment with ideas and make something different.
@@ -1306,14 +1419,16 @@ footer {
             <h4>MORE</h4>
             <a href="free-downloads.html">Free Downloads</a>
             <a href="#categories">All Categories</a>
-            <a href="vanta-sync.html">Home</a>
+            <a href="index.html">Home</a>
         </div>
+
     </div>
 
     <div class="footer-bottom">
         <span>© 2026 VANTA SYNC. ALL RIGHTS RESERVED.</span>
         <span>BUILT FOR THE CREATIVE MINDS.</span>
     </div>
+
 </footer>
 
 <script>
@@ -1322,7 +1437,8 @@ const navLinks = document.getElementById("navLinks");
 
 menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("open");
-    menuToggle.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+    menuToggle.textContent =
+        navLinks.classList.contains("open") ? "✕" : "☰";
 });
 
 document.querySelectorAll(".nav-links a").forEach(link => {
